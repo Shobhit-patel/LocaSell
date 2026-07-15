@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "userId": 1001,
+      "price": 45000,
+      "product_name": "iPhone 13",
+      "description": "128GB smartphone in excellent condition.",
+      "category": "Electronics",
+      "condition": "Like new",
+      "distance_km": 5,
+      "place": "Lucknow",
+      "listed_date": "2026-05-28",
+      "brand": "Apple",
+      "model": "iPhone 13",
+      "product_age": "2 months",
+      "original_price": 69900
+    }
+]

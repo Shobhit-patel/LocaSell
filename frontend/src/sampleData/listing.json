@@ -1,0 +1,275 @@
+[
+  {
+    "id": 1,
+    "title": "iPhone 13 Pro 128GB",
+    "description": "Well-maintained iPhone 13 Pro with original charger.",
+    "price": 650,
+    "category": "Electronics",
+    "condition": "New",
+    "brand": "Apple",
+    "model": "iPhone 13",
+    "product_age": "2 months",
+    "original_price": 69900,
+    "photos": [
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -74.0060,
+        40.7128
+      ]
+    },
+    "seller": 1001,
+    "status": "active",
+    "createdAt": "2025-01-10T09:00:00Z",
+    "updatedAt": "2025-01-10T09:00:00Z"
+  },
+  {
+    "id": 2,
+    "title": "Wooden Study Desk",
+    "description": "Spacious wooden desk, perfect for home office.",
+    "price": 120,
+    "category": "Furniture",
+    "condition": "Like new",
+    "brand": "Samsung",
+    "model": "Galaxy S22",
+    "product_age": "2 years",
+    "original_price": 72999,
+    "photos": [
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800",
+      "https://images.unsplash.com/photo-1517336714739-489689fd1ca8?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -118.2437,
+        34.0522
+      ]
+    },
+    "seller": 1002,
+    "status": "active",
+    "createdAt": "2025-01-11T10:15:00Z",
+    "updatedAt": "2025-01-11T10:15:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Mountain Bike",
+    "description": "21-speed mountain bike in excellent condition.",
+    "price": 300,
+    "category": "Clothing",
+    "condition": "Good",
+    "brand": "Dell",
+    "model": "Inspiron 3511",
+    "product_age": "6 months",
+    "original_price": 52000,
+    "photos": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800",
+      "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800",
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        26.4609135,
+        80.3217588
+      ]
+    },
+    "seller": 1003,
+    "status": "active",
+    "createdAt": "2025-01-12T08:30:00Z",
+    "updatedAt": "2025-01-12T08:30:00Z"
+  },
+  {
+    "id": 4,
+    "title": "Samsung 55-inch Smart TV",
+    "description": "4K UHD Smart TV with remote included.",
+    "price": 450,
+    "category": "Books",
+    "condition": "Fair",
+    "brand": "Sony",
+    "model": "PS4 Slim",
+    "product_age": "4 years",
+    "original_price": 28000,
+    "photos": [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
+      "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=800",
+      "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800",
+      "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -95.3698,
+        29.7604
+      ]
+    },
+    "seller": 1004,
+    "status": "sold",
+    "createdAt": "2025-01-13T11:00:00Z",
+    "updatedAt": "2025-01-15T14:00:00Z"
+  },
+  {
+    "id": 5,
+    "title": "Gaming Laptop",
+    "description": "RTX 3060 gaming laptop with 16GB RAM.",
+    "price": 950,
+    "category": "Vehicles",
+    "condition": "For parts",
+    "brand": "JBL",
+    "model": "Flip 5",
+    "product_age": "1 months",
+    "original_price": 6999,
+    "photos": [
+      "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=80"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -122.4194,
+        37.7749
+      ]
+    },
+    "seller": 1005,
+    "status": "active",
+    "createdAt": "2025-01-14T12:20:00Z",
+    "updatedAt": "2025-01-14T12:20:00Z"
+  },
+  {
+    "id": 6,
+    "title": "Dining Table Set",
+    "description": "6-seater dining table with chairs.",
+    "price": 280,
+    "category": "Electronics",
+    "condition": "Good",
+    "brand": "IKEA",
+    "model": "MALM",
+    "product_age": "1 year",
+    "original_price": 18000,
+    "photos": [
+      "https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=800",
+      "https://images.unsplash.com/photo-1541140532154-b024d705b90a?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -80.1918,
+        25.7617
+      ]
+    },
+    "seller": 1006,
+    "status": "active",
+    "createdAt": "2025-01-15T09:45:00Z",
+    "updatedAt": "2025-01-15T09:45:00Z"
+  },
+  {
+    "id": 7,
+    "title": "Canon EOS 90D Camera",
+    "description": "DSLR camera with 18-135mm lens.",
+    "price": 850,
+    "category": "Furniture",
+    "condition": "New",
+    "brand": "Green Soul",
+    "model": "Monster",
+    "product_age": "2 years",
+    "original_price": 18000,
+    "photos": [
+      "https://images.unsplash.com/photo-1505843513577-22bb7d21e455?w=800",
+      "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=800",
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -71.0589,
+        42.3601
+      ]
+    },
+    "seller": 1007,
+    "status": "active",
+    "createdAt": "2025-01-16T14:10:00Z",
+    "updatedAt": "2025-01-16T14:10:00Z"
+  },
+  {
+    "id": 8,
+    "title": "Sony PlayStation 5",
+    "description": "PS5 console with one controller.",
+    "price": 500,
+    "category": "Clothing",
+    "condition": "Like New",
+    "brand": "Urban Ladder",
+    "model": "Luca",
+    "product_age": "3 years",
+    "original_price": 55000,
+    "photos": [
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",
+      "https://images.unsplash.com/photo-1517705008128-361805f42e86?w=800",
+      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800",
+      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -112.0740,
+        33.4484
+      ]
+    },
+    "seller": 1008,
+    "status": "sold",
+    "createdAt": "2025-01-17T15:30:00Z",
+    "updatedAt": "2025-01-18T16:00:00Z"
+  },
+  {
+    "id": 9,
+    "title": "Refrigerator 300L",
+    "description": "Energy-efficient refrigerator in good condition.",
+    "price": 350,
+    "category": "Books",
+    "condition": "Fair",
+    "brand": "Home Centre",
+    "model": "Rack",
+    "product_age": "2 years",
+    "original_price": 12000,
+    "photos": [
+      "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -104.9903,
+        39.7392
+      ]
+    },
+    "seller": 1009,
+    "status": "active",
+    "createdAt": "2025-01-18T10:00:00Z",
+    "updatedAt": "2025-01-18T10:00:00Z"
+  },
+  {
+    "id": 10,
+    "title": "Acoustic Guitar",
+    "description": "Yamaha acoustic guitar with carrying bag.",
+    "price": 180,
+    "category": "Vehicles ",
+    "condition": "Good",
+    "brand": "Nilkamal",
+    "model": "Family",
+    "product_age": "2 years",
+    "original_price": 26000,
+    "photos": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800",
+      "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800"
+    ],
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -84.3880,
+        33.7490
+      ]
+    },
+    "seller": 1010,
+    "status": "active",
+    "createdAt": "2025-01-19T13:25:00Z",
+    "updatedAt": "2025-01-19T13:25:00Z"
+  }
+]

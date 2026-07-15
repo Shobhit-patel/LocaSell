@@ -1,0 +1,222 @@
+[
+    {
+        "id": 1010,
+        "name": "John Smith",
+        "email": "john.smith@example.com",
+        "password": "john123",
+        "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -74.0060,
+                40.7128
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.8,
+        "reviewCount": 245,
+        "soldItem": 1200,
+        "activeItem": 35,
+        "responsePercent": 98,
+        "createdAt": "2apr 2025"
+    },
+    {
+        "id": 1009,
+        "name": "Emma Johnson",
+        "email": "emma.johnson@example.com",
+        "password": "emma123",
+        "avatar": "",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -118.2437,
+                34.0522
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.6,
+        "reviewCount": 180,
+        "soldItem": 850,
+        "activeItem": 22,
+        "responsePercent": 94,
+        "createdAt": "oct 2025"
+    },
+    {
+        "id": 1008,
+        "name": "Michael Brown",
+        "email": "michael.brown@example.com",
+        "password": "michael123",
+        "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -87.6298,
+                41.8781
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.9,
+        "reviewCount": 320,
+        "soldItem": 1750,
+        "activeItem": 48,
+        "responsePercent": 99,
+        "createdAt": "dec 2025"
+    },
+    {
+        "id": 1007,
+        "name": "Sophia Davis",
+        "email": "sophia.davis@example.com",
+        "password": "sophia123",
+        "avatar": "",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -95.3698,
+                29.7604
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.5,
+        "reviewCount": 210,
+        "soldItem": 980,
+        "activeItem": 28,
+        "responsePercent": 96,
+        "createdAt": "jan 2019"
+    },
+    {
+        "id": 1006,
+        "name": "William Wilson",
+        "email": "william.wilson@example.com",
+        "password": "william123",
+        "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -122.4194,
+                37.7749
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.7,
+        "reviewCount": 275,
+        "soldItem": 1430,
+        "activeItem": 40,
+        "responsePercent": 97,
+        "createdAt": "mar 2020"
+    },
+    {
+        "id": 1005,
+        "name": "Olivia Martinez",
+        "email": "olivia.martinez@example.com",
+        "password": "olivia123",
+        "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -80.1918,
+                25.7617
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.4,
+        "reviewCount": 135,
+        "soldItem": 720,
+        "activeItem": 18,
+        "responsePercent": 92,
+        "createdAt": "apr 2021"
+    },
+    {
+        "id": 1004,
+        "name": "James Anderson",
+        "email": "james.anderson@example.com",
+        "password": "james123",
+        "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -71.0589,
+                42.3601
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.8,
+        "reviewCount": 165,
+        "soldItem": 680,
+        "activeItem": 15,
+        "responsePercent": 91,
+        "createdAt": "aug 2024"
+    },
+    {
+        "id": 1003,
+        "name": "Ava Thomas",
+        "email": "ava.thomas@example.com",
+        "password": "ava123",
+        "avatar": "",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -112.0740,
+                33.4484
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.3,
+        "reviewCount": 390,
+        "soldItem": 2100,
+        "activeItem": 55,
+        "responsePercent": 100,
+        "createdAt": "nov 2021"
+    },
+    {
+        "id": 1002,
+        "name": "Benjamin Taylor",
+        "email": "benjamin.taylor@example.com",
+        "password": "benjamin123",
+        "avatar": "https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -104.9903,
+                39.7392
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.6,
+        "reviewCount": 120,
+        "soldItem": 540,
+        "activeItem": 12,
+        "responsePercent": 89,
+        "createdAt": " 2021"
+    },
+    {
+        "id": 1001,
+        "name": "Mia White",
+        "email": "mia.white@example.com",
+        "password": "mia123",
+        "avatar": "",
+        "location": {
+            "type": "Point",
+            "coordinates": [
+                -84.3880,
+                33.7490
+            ]
+        },
+        "ratingsGiven": [],
+        "ratingsReceived": [],
+        "averageRating": 4.9,
+        "reviewCount": 310,
+        "soldItem": 1680,
+        "activeItem": 42,
+        "responsePercent": 98,
+        "createdAt": "jan 2021"
+    }
+]
