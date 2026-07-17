@@ -9,6 +9,8 @@ import { setOpen } from '../../reducers/features/popup/sellerPopup'
 import SellerProfile from '../SellerProfile'
 import { toggleListingStatus } from '../../reducers/features/listing/soOneListing'
 import toast from "react-hot-toast";
+import star from '../../assets/icons/star.png'
+
 
 const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
     const navigate = useNavigate()
@@ -149,7 +151,7 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                         <div className='flex items-center gap-1 mt-4'>
                             {
                                 ratingArr.map((i) => (
-                                    <img key={i} className='w-3.5' src="../../../src/assets/icons/star.png" alt="" />
+                                    <img key={i} className='w-3.5' src={star} alt="" />
                                 ))
                             }
                             <span className='text-h3 font-bold text-amber-700'>{seller?.averageRating}</span>
