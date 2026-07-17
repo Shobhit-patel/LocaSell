@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import WishlistButton from '../WishlistButton';
 import { submitSoOneListingData } from '../../reducers/features/listing/soOneListing';
+import hamburger from '../../assets/icons/hamburger.png'
 
 const SoCart = ({setSidebarOpen}) => {
     const navigate = useNavigate()
@@ -39,7 +40,7 @@ const SoCart = ({setSidebarOpen}) => {
         return (
             <div className='flex-1 text-center'>
                   <button className=' block lg:hidden text-right mb-5'>
-                    <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer dark:invert-100' src="../../../src/assets/icons/hamburger.png" alt="" />
+                    <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer dark:invert-100' src={hamburger} alt="" />
                 </button>
                 <h1 className='font-extrabold font-stretch-150% text-logo mt-30'>Cart is empty</h1>
             </div>
@@ -49,7 +50,7 @@ const SoCart = ({setSidebarOpen}) => {
     return (
         <>
             <button className=' block lg:hidden text-right mb-5'>
-                <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer dark:invert-100' src="../../../src/assets/icons/hamburger.png" alt="" />
+                <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer dark:invert-100' src={hamburger} alt="" />
             </button>
             <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4'>
                 {

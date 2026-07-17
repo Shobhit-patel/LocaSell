@@ -143,10 +143,6 @@ const PostSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                         {loading ? 'loading...' : 'Post listing --'}
                     </button>
 
-                    {/* add in future */}
-                    {/* <div className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
-                    <button className='cursor-pointer'>Save as draft</button>
-                    </div> */}
                 </div>
 
             </div>

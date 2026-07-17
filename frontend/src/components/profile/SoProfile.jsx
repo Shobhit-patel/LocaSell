@@ -2,6 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOpen } from '../../reducers/features/popup/editPopup'
 import EditProfile from './EditProfile'
+import hamburger from '../../assets/icons/hamburger.png'
+import star from '../../assets/icons/star.png'
 
 const SoProfile = ({ setSidebarOpen }) => {
     const dispatch = useDispatch()
@@ -33,7 +35,7 @@ const SoProfile = ({ setSidebarOpen }) => {
                     <button onClick={() => dispatch(setOpen(true))} className='border border-border md:hidden max-sm:hidden sm:hidden lg:block  rounded-xl cursor-pointer text-h2 px-5 py-2 '>Edit profile</button>
                     <button onClick={() => dispatch(setOpen(true))} className='border border-border rounded-xl cursor-pointer lg:hidden text-h2 px-5 py-2 '>Edit</button>
                     <button className=' block lg:hidden '>
-                        <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer dark:invert-100' src="../../../src/assets/icons/hamburger.png" alt="" />
+                        <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer dark:invert-100' src={hamburger} alt="" />
                     </button>
                 </div>
             </div>
@@ -51,7 +53,7 @@ const SoProfile = ({ setSidebarOpen }) => {
                     <div className='flex justify-center items-center gap-1 '>
                         {
                             ratingArr.map((i) => (
-                                <img key={i} className='w-5 h-5 ' src="../../../src/assets/icons/star.png" alt="" />
+                                <img key={i} className='w-5 h-5 ' src={star} alt="" />
                             ))
                         }
                         <h1 className='text-logo font-bold text-amber-700'>{user?.averageRating}</h1>

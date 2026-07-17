@@ -4,6 +4,7 @@ import { setIsSignupOpen } from '../../reducers/features/popup/signupPopup'
 import { setIsLogin, setIsOpen } from '../../reducers/features/popup/loginPopup'
 import { submitLoginData } from '../../reducers/features/auth/login'
 import toast from 'react-hot-toast'
+import close from '../../assets/icons/close.png'
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -88,7 +89,7 @@ const Login = () => {
             <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 h-110 mx-4 p-5 relative text-left text-sm rounded-xl" >
 
                 <button type="button" onClick={closeLogin} className="absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer "  >
-                    <img className="w-3" src="/src/assets/icons/close.png" alt="Close" />
+                    <img className="w-3" src={close} alt="Close" />
                 </button>
 
 

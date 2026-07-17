@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setOpen } from '../../reducers/features/popup/editPopup';
 import { editProfile } from '../../reducers/features/auth/login';
 import toast from "react-hot-toast";
+import close from '../../assets/icons/close.png'
 
 const EditProfile = () => {
     const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const EditProfile = () => {
                 <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 h-70 mx-4 p-5 relative text-left text-sm rounded-xl ">
 
                     <div onClick={() => dispatch(setOpen(false))} className='absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer'>
-                        <img className='w-3 cursor-pointer' src="../../../src/assets/icons/close.png" alt="" />
+                        <img className='w-3 cursor-pointer' src={close} alt="" />
                     </div>
 
                     <div className='flex justify-center items-center gap-1.5 mb-5'>

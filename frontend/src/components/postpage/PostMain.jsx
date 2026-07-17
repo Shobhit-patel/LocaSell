@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addImage, setProductInfo } from '../../reducers/features/uploadedProdSlice'
 import { setOpen } from '../../reducers/features/popup/mapPopup'
 import toast from 'react-hot-toast'
+import hamburger from '../../assets/icons/hamburger.png'
+import close from '../../assets/icons/close.png'
 
 const PostMain = ({ setSidebarOpen }) => {
     const categories = [
@@ -129,7 +131,7 @@ const PostMain = ({ setSidebarOpen }) => {
         <>
             <div className='flex-1 p-5 lg:h-[calc(100vh_-_120px)] md:h-[calc(100vh_-_175px)] min-sm:h-[calc(100vh_-_220px)] h-[calc(100vh_-_220px)] mt-0 overflow-y-auto'>
                 <button className=' block lg:hidden w-full text-right mb-3'>
-                    <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100' src="../../../src/assets/icons/hamburger.png" alt="" />
+                    <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100' src={hamburger} alt="" />
                 </button>
 
 
@@ -148,7 +150,7 @@ const PostMain = ({ setSidebarOpen }) => {
                         preview.map((img, key) => (
                             <div key={key} className='flex justify-center items-center relative bg-gray-100 border border-border w-20 h-20  rounded-xl '>
                                 <img className='h-19.5 rounded-xl' src={img} alt="preview" />
-                                <img onClick={() => removeImage(key)} className='absolute w-4 h-4 bg-red-400 p-0.5 -right-1.5 -top-1.5 rounded-full cursor-pointer' src="../../../src/assets/icons/close.png" alt="cross" />
+                                <img onClick={() => removeImage(key)} className='absolute w-4 h-4 bg-red-400 p-0.5 -right-1.5 -top-1.5 rounded-full cursor-pointer' src={close} alt="cross" />
                             </div>
                         ))
                     }

@@ -4,6 +4,7 @@ import MessageMain from '../components/messagepage/MessageMain'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsOpen } from '../reducers/features/popup/loginPopup'
 import { useNavigate } from 'react-router-dom'
+import hamhurger from '../assets/icons/hamburger.png'
 
 const MessagePage = () => {
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ const MessagePage = () => {
           !seller?.Product ?
             <div className='flex-1 text-center'>
               <button className='w-full p-5 lg:hidden text-right '>
-                <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer ' src="../../../src/assets/icons/hamburger.png" alt="" />
+                <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer ' src={hamhurger} alt="" />
               </button>
               <h1 className='font-extrabold font-stretch-150% text-logo mt-30'>Select user to start chat</h1>
             </div>

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getProductUser } from '../../reducers/features/productUserSlice'
 import ImagePopup from '../ImagePopup'
 import { setImagePopupOpen, setImageUrl } from '../../reducers/features/imagePopupSlice'
+import right from '../../assets/icons/right.png'
+import hamburger from '../../assets/icons/hamburger.png'
 
 const ProductMain = ({ setSidebarOpen }) => {
     const navigate = useNavigate()
@@ -100,14 +102,14 @@ const ProductMain = ({ setSidebarOpen }) => {
                 <div className='flex items-center gap-2' >
                     <div className='flex items-center gap-1 lg:gap-2 w-full'>
                         <span onClick={() => navigate('/')} className='text-gray-500 dark:text-gray-400 text-h2 cursor-pointer '>Home </span>
-                        <img className='w-3 h-3 opacity-70 dark:invert' src="../../../src/assets/icons/right.png" alt="" />
+                        <img className='w-3 h-3 opacity-70 dark:invert' src={right} alt="" />
                         <span onClick={() => navigate('/')} className='text-gray-500 dark:text-gray-400 text-h2 cursor-pointer '>{product?.category} </span>
-                        <img className='w-3 h-3 opacity-70 dark:invert' src="../../../src/assets/icons/right.png" alt="" />
+                        <img className='w-3 h-3 opacity-70 dark:invert' src={right} alt="" />
                         <span className='text-black dark:text-white font-medium text-h2'>{product?.name}</span>
                     </div>
 
                     <button className=' block lg:hidden  text-right '>
-                        <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100' src="../../../src/assets/icons/hamburger.png" alt="" />
+                        <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100' src={hamburger} alt="" />
                     </button>
                 </div>
 

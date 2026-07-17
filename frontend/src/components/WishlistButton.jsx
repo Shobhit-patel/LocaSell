@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearMessage, toggleWishlist } from "../reducers/features/wishlist/wishlisSlice";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import loader from '../assets/icons/loader.png'
+import heartA from '../assets/icons/heartA.png'
+import heartNA from '../assets/icons/heartNA.png'
 
 const WishlistButton = ({ product }) => {
     const dispatch = useDispatch();
@@ -34,15 +37,15 @@ const WishlistButton = ({ product }) => {
         <button className='cursor-pointer absolute bg-white border border-border rounded-full p-1.5 right-5 -top-36' onClick={handleClick}>
             {isWishlisted ? (
                 isLoading ? (
-                    <img className="w-5.5 animate-spin" src="../../../src/assets/icons/loader.png" alt="" />
+                    <img className="w-5.5 animate-spin" src={loader} alt="" />
                 ) : (
-                    <img className="w-5.5" src="../../../src/assets/icons/heartA.png" alt="" />
+                    <img className="w-5.5" src={heartA} alt="" />
                 )
             ) : (
                 isLoading ? (
-                    <img className="w-5.5 animate-spin" src="../../../src/assets/icons/loader.png" alt="" />
+                    <img className="w-5.5 animate-spin" src={loader} alt="" />
                 ) : (
-                    <img className="w-5.5" src="../../../src/assets/icons/heartNA.png" alt="" />
+                    <img className="w-5.5" src={heartNA} alt="" />
                 )
             )}
         </button>

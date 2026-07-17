@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import { MapContainer, TileLayer, useMap, useMapEvents } from 'react-leaflet'
 import { getPopUpLocation } from '../reducers/features/location/locationCoordinates';
 import Rating from './Rating';
+import close from '../assets/icons/close.png'
+import star from '../assets/icons/star.png'
 
 
 function MapEvents({ dispatch }) {
@@ -74,7 +76,7 @@ const SellerProfile = ({ seller }) => {
                 <div onClick={(e) => e.stopPropagation()} className='bg-white dark:bg-gray-900 text-black dark:text-white relative flex flex-col justify-center w-140 h-auto mx-4 px-5 py-5 text-left text-sm rounded-xl'>
 
                     <div onClick={() => dispatch(setOpen(false))} className='absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer'>
-                        <img className='w-3 cursor-pointer' src="../../../src/assets/icons/close.png" alt="" />
+                        <img className='w-3 cursor-pointer' src={close} alt="" />
                     </div>
 
                     <div className='flex justify-start items-center gap-5 mt-5'>
@@ -96,7 +98,7 @@ const SellerProfile = ({ seller }) => {
                     <div className='flex items-center gap-1 mt-5'>
                         {
                             ratingArr.map((i) => (
-                                <img key={i} className='w-3.5 ' src="../../../src/assets/icons/star.png" alt="" />
+                                <img key={i} className='w-3.5 ' src={star} alt="" />
                             ))
                         }
                         <span className='text-h1 font-bold text-amber-700'>{seller?.averageRating}</span>

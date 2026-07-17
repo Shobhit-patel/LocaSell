@@ -8,6 +8,7 @@ import { setOpen } from "../reducers/features/popup/mapPopup";
 import { getLocation, getPopUpLocation } from "../reducers/features/location/locationCoordinates";
 import { editProfile } from "../reducers/features/auth/login";
 import toast from "react-hot-toast";
+import close from '../assets/icons/close.png'
 
 function MapEvents({ dispatch }) {
     useMapEvents({
@@ -76,7 +77,7 @@ const PopupMap = () => {
                 <div className='bg-white dark:bg-gray-900 text-black dark:text-white relative flex flex-col justify-center w-140 h-auto mx-4 px-5 py-10 text-left text-sm rounded-xl' onClick={(e) => e.stopPropagation()} >
 
                     <div onClick={() => dispatch(setOpen(false))} className='absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer'>
-                        <img className='w-3 cursor-pointer' src="../../../src/assets/icons/close.png" alt="" />
+                        <img className='w-3 cursor-pointer' src={close} alt="" />
                     </div>
 
                     <div className="text-center mb-5">

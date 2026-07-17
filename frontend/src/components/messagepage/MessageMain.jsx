@@ -5,6 +5,7 @@ import { socket } from '../../socket/socket';
 import { submitSoOneListingData, toggleListingStatus } from '../../reducers/features/listing/soOneListing';
 import { useNavigate } from 'react-router-dom';
 import { setActiveChat } from '../../reducers/features/chat/chatSlice';
+import hamburger from '../../assets/icons/hamburger.png'
 
 const MessageMain = ({ setSidebarOpen }) => {
   const navigate = useNavigate()
@@ -103,7 +104,7 @@ const MessageMain = ({ setSidebarOpen }) => {
           }} className='border border-border 400 hover:border-primary hover:bg-primary hover:text-white text-h3 px-3 py-1 rounded-xl cursor-pointer'>Product details</button>
 
           <button className='  lg:hidden text-right '>
-            <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer ' src="../../../src/assets/icons/hamburger.png" alt="" />
+            <img onClick={() => setSidebarOpen(true)} className='w-5 cursor-pointer ' src={hamburger} alt="" />
           </button>
         </div>
       </div>

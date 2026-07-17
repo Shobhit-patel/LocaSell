@@ -272,8 +272,7 @@ LocaSell/
 # 🌐 Live Demo
 
 Frontend: live demo link
-
-Backend: live demo link
+///// i will deploy backned on render  and frontend in vercel but icon are not soing so i deploy in netfily but so blank
 
 ---
 

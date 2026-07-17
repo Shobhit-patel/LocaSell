@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import SoMap from './SoMap'
 import { submitSoOneListingData } from '../../reducers/features/listing/soOneListing'
 import WishlistButton from '../WishlistButton'
+import hamburger from '../../assets/icons/hamburger.png'
 
 const Main = ({ setSidebarOpen }) => {
     const navigate = useNavigate()
@@ -50,7 +51,7 @@ const Main = ({ setSidebarOpen }) => {
                     <div className='flex items-center gap-3'>
                         <div className='flex items-center gap-5'>
                             <button className=' block lg:hidden '>
-                                <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100 ' src="../../../src/assets/icons/hamburger.png" alt="" />
+                                <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100 ' src={hamburger} alt="" />
                             </button>
                             <span className='text-h2 font-semibold'>Nearby listings</span>
                         </div>
