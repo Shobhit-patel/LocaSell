@@ -6,6 +6,7 @@ import { submitSoOneListingData, toggleListingStatus } from '../../reducers/feat
 import { useNavigate } from 'react-router-dom';
 import { setActiveChat } from '../../reducers/features/chat/chatSlice';
 import hamburger from '../../assets/icons/hamburger.png'
+import sendIcon from '../../assets/icons/send.png'
 
 const MessageMain = ({ setSidebarOpen }) => {
   const navigate = useNavigate()
@@ -144,7 +145,7 @@ const MessageMain = ({ setSidebarOpen }) => {
         <div className='flex sticky bottom-0 gap-2.5 border-b border-border dark:border-gray-400 bg-white dark:bg-gray-900 px-5 py-3 transition-colors duration-300'>
           <input onChange={e => setText(e.target.value)} type="text" value={text} placeholder='Type a message...' className='h-10 p-3 text-h1 w-full border border-gray-400 dark:border-gray-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 outline-none rounded-xl' />
           <div onClick={send} className='flex justify-center items-center w-20 h-10 bg-primary text-white border border-primary rounded-xl cursor-pointer'>
-            <img className='w-5 h-5 invert-100 dark:invert-0' src="../../../src/assets/icons/send.png" alt="send" />
+            <img className='w-5 h-5 invert-100 dark:invert-0' src={sendIcon} alt="" />
           </div>
         </div>
         :
