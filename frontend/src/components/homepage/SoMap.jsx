@@ -1,8 +1,19 @@
 import React, { useEffect } from 'react'
 import { Circle, MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import L from "leaflet";
+import { Icon } from "leaflet";
 import 'leaflet/dist/leaflet.css'
 import { useSelector } from 'react-redux'
+import loader from '../../assets/icons/loader.png'
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+});
 
 function DoCenter({ location, radius }) {
     const map = useMap();
@@ -53,7 +64,7 @@ const SoMap = () => {
                         !Number.isFinite(location?.lng) ||
                         location.lat === 0 && location.lng === 0 ?
                         <div className='flex justify-center items-center bg-secondary h-60 w-full'>
-                            <img className="w-25 animate-spin" src="../../../src/assets/icons/loader.png" alt="" />
+                            <img className="w-25 animate-spin" src={loader} alt="" />
                         </div>
                         :
 
