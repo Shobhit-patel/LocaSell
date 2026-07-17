@@ -4,14 +4,12 @@ import L from "leaflet";
 import 'leaflet/dist/leaflet.css'
 import { useSelector } from 'react-redux'
 import loader from '../../assets/icons/loader.png'
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
-    iconUrl: markerIcon,
-    shadowUrl: markerShadow,
+    iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 function DoCenter({ location, radius }) {
