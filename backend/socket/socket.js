@@ -8,7 +8,7 @@ const onlineUsers = new Map();
 const initializeSocket = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: "https://loca-sell.vercel.app/",
+            origin: "https://loca-sell.vercel.app",
             credentials: true,
         },
     });
