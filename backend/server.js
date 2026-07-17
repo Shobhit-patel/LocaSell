@@ -21,7 +21,7 @@ const app = express()
 
 const server = http.createServer(app);
 
-app.use(cors({ origin: 'http://localhost:5173', }));
+app.use(cors({ origin: 'https://loca-sell.vercel.app/', }));
 
 app.use(express.json())
 
