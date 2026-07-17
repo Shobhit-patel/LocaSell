@@ -45,13 +45,13 @@ const SoMap = () => {
         )
     }
 
-    if (user?.location?.coordinates?.[0] === 0 && user?.location?.coordinates?.[1] === 0) {
-        return (
-            <div className='flex justify-center items-center border border-border bg-secondary m-5 h-60 rounded-xl'>
-                <span className='text-logo'>Select Location</span>
-            </div>
-        )
-    }
+    // if (user?.location?.coordinates?.[0] === 0 && user?.location?.coordinates?.[1] === 0) {
+    //     return (
+    //         <div className='flex justify-center items-center border border-border bg-secondary m-5 h-60 rounded-xl'>
+    //             <span className='text-logo'>Select Location</span>
+    //         </div>
+    //     )
+    // }
 
     return (
         <>
