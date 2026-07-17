@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { Circle, MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import L from "leaflet";
-import { Icon } from "leaflet";
 import 'leaflet/dist/leaflet.css'
 import { useSelector } from 'react-redux'
 import loader from '../../assets/icons/loader.png'

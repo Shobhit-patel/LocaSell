@@ -1,22 +1,22 @@
 import "dotenv/config";
 import express from 'express'
 import cors from 'cors'
-import http from "http";
+import http from "http"; 
 
 import connectDB from './config/db.js'
 await import('./config/cloudinary.js')
 import initializeSocket from './socket/socket.js';
-
-import userRoutes from './routes/userRoutes.js'
+ 
+import userRoutes from './routes/userRoutes.js' 
 import listingRoutes from './routes/listingRoutes.js'
-import chatRoutes from './routes/chatRoutes.js'
+import chatRoutes from './routes/chatRoutes.js' 
 import wishlistRoutes from './routes/wishListRoutes.js'
-import cartRoutes from './routes/cartRoute.js'
-import notificationRoutes from './routes/notificationRoutes.js' 
+import cartRoutes from './routes/cartRoute.js' 
+import notificationRoutes from './routes/notificationRoutes.js'
 import ratingRoutes from './routes/ratingRoute.js'
 
-connectDB()    
-  
+connectDB()
+
 const app = express()
 
 const server = http.createServer(app);
