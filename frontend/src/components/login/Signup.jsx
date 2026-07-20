@@ -95,7 +95,7 @@ const Signup = () => {
 
     return (
         <div >
-            <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-10 " onClick={() => dispatch(setIsSignupOpen(false))}>
+            <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-20 " onClick={() => dispatch(setIsSignupOpen(false))}>
                 <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 h-125 mx-4 p-5 relative text-left text-sm rounded-xl ">
 
                     <div onClick={() => dispatch(setIsSignupOpen(false))} className='absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer'>
