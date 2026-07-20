@@ -2,6 +2,8 @@
 
 A **location-based marketplace** built with the **MERN Stack** that allows users to buy and sell second-hand products within a **20 KM radius**.
 
+[Download or watch the demo](demo.mp4)
+
 ## ✨ Features
 
 - 🔐 JWT Authentication
