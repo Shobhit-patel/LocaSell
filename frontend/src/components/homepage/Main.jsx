@@ -60,7 +60,12 @@ const Main = ({ setSidebarOpen }) => {
                     <div className='text-h3 text-gray-500'>{filteredProducts?.length || 0} results within {filters?.radius} km</div>
                 </div>
 
-                <SoMap />
+                  {
+                    location.lat === 0 && location.lng === 0 ?
+                        null
+                        :
+                        <SoMap />
+                }
 
                 <div className='grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-4 p-5'>
                     {
