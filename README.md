@@ -39,7 +39,6 @@ A **location-based marketplace** built with the **MERN Stack** that allows users
 
 ```bash
 git clone <repository-url>
-cd LocaSell
 ```
 
 ### Backend
@@ -94,7 +93,7 @@ VITE_API_URL=
 
 ## 🌐 Live Demo
 
-https://loca-sell.vercel.app/
+https://loca-sell.vercel.app
 
 ## 👨‍💻 Author
 
