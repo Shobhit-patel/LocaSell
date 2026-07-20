@@ -3,6 +3,16 @@ import Listing from "../../models/Listing.js";
 export const soListing = async (req, res) => {
     try {
         const { category, price, radius, latitude, longitude, condition, search } = req.query;
+        
+        if (Number(latitude) === 0 && Number(longitude) === 0) {
+            const products = await Listing.find();
+
+            return res.status(200).json({
+                success: true,
+                count: products.length,
+                data: products,
+            });
+        }
 
         const filter = {};
         if (category !== 'All listings') {
