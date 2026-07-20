@@ -35,23 +35,14 @@ const SoMap = () => {
     const radius = useSelector((state) => state.soListing.filter?.radius) || 5
     const location = useSelector((state) => state.locationCoordinates?.currLocation)
     const center = [location?.lat, location?.lng];
-    const user = useSelector((state) => state.signup.user || state.login.user);
 
     if (location.lng === 0 && location.lat === 0) {
         return (
-            <div className='flex justify-center items-center border border-border bg-secondary m-5 h-60 rounded-xl'>
+            <div className='flex justify-center items-center border border-border bg-secondary ml-5 mr-5 mt-5 h-60 rounded-xl'>
                 <span className='text-logo'>Select Location</span>
             </div>
         )
     }
-
-    // if (user?.location?.coordinates?.[0] === 0 && user?.location?.coordinates?.[1] === 0) {
-    //     return (
-    //         <div className='flex justify-center items-center border border-border bg-secondary m-5 h-60 rounded-xl'>
-    //             <span className='text-logo'>Select Location</span>
-    //         </div>
-    //     )
-    // }
 
     return (
         <>
