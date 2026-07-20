@@ -271,7 +271,7 @@ LocaSell/
 
 # 🌐 Live Demo
 
-Frontend: https://loca-sell.vercel.app/
+ https://loca-sell.vercel.app
 
 ---
 
