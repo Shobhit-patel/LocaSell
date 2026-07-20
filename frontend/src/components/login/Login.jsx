@@ -85,7 +85,7 @@ const Login = () => {
 
 
     return (
-        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-10" onClick={closeLogin} >
+        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-20" onClick={closeLogin} >
             <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 h-110 mx-4 p-5 relative text-left text-sm rounded-xl" >
 
                 <button type="button" onClick={closeLogin} className="absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer "  >
