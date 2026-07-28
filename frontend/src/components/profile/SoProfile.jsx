@@ -104,8 +104,8 @@ const SoProfile = ({ setSidebarOpen }) => {
                                     <div className='w-full'>
                                         <div className='flex justify-between'>
                                             <h3>
-                                                {item.reviewer.firstName}{" "}
-                                                {item.reviewer.lastName}
+                                                {item?.reviewer?.firstName}{" "}
+                                                {item?.reviewer?.lastName}
                                             </h3>
                                             <span className="text-sm text-gray-500">
                                                 {new Date(item.createdAt).toLocaleDateString()}
