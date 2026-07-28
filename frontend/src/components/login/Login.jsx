@@ -5,6 +5,7 @@ import { setIsLogin, setIsOpen } from '../../reducers/features/popup/loginPopup'
 import { submitLoginData } from '../../reducers/features/auth/login'
 import toast from 'react-hot-toast'
 import close from '../../assets/icons/close.png'
+import Loading from '../Loading'
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -86,7 +87,7 @@ const Login = () => {
 
     return (
         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-20" onClick={closeLogin} >
-            <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 h-110 mx-4 p-5 relative text-left text-sm rounded-xl" >
+            <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 max-h-190 min-h-110 mx-4 px-5 py-12 relative text-left text-sm rounded-xl" >
 
                 <button type="button" onClick={closeLogin} className="absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer "  >
                     <img className="w-3" src={close} alt="Close" />
@@ -100,11 +101,11 @@ const Login = () => {
 
                     <div>
                         <span className="text-primary text-heading font-bold">
-                            loca
+                            Loca
                         </span>
 
                         <span className="text-heading font-bold">
-                            sell
+                            Sell
                         </span>
                     </div>
                 </div>
@@ -133,7 +134,7 @@ const Login = () => {
                     </div>
 
                     <button disabled={loading} className=" bg-primary w-full text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mb-3 pt-3 pb-3" >
-                        {loading ? "Loading..." : "Log in"}
+                        {loading ? <Loading /> : "Log in"}
                     </button>
                 </form>
 

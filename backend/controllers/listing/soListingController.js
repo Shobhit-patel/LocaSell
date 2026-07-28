@@ -2,33 +2,50 @@ import Listing from "../../models/Listing.js";
 
 export const soListing = async (req, res) => {
     try {
-        const { category, price, radius, latitude, longitude, condition, search } = req.query;
-        
-        if (Number(latitude) === 0 && Number(longitude) === 0) {
-            const products = await Listing.find();
-
-            return res.status(200).json({
-                success: true,
-                count: products.length,
-                data: products,
-            });
-        }
+        const {
+            category,
+            price,
+            radius,
+            latitude,
+            longitude,
+            condition,
+            search,
+        } = req.query;
 
         const filter = {};
-        if (category !== 'All listings') {
-            filter.category = category; 
-        } else {
-            filter;
+
+        if (category && category !== "All listings") {
+            filter.category = category;
         }
 
         if (price) {
             filter.price = {
-                ...filter.price,
                 $lte: Number(price),
             };
         }
 
-        if (radius && latitude && longitude) {
+        if (condition) {
+            const conditions = Array.isArray(condition)
+                ? condition
+                : [condition];
+
+            filter.condition = {
+                $in: conditions,
+            };
+        }
+
+        if (search) {
+            filter.name = {
+                $regex: search,
+                $options: "i",
+            };
+        }
+
+        if (
+            Number(latitude) !== 0 &&
+            Number(longitude) !== 0 &&
+            radius
+        ) {
             filter.location = {
                 $near: {
                     $geometry: {
@@ -40,21 +57,9 @@ export const soListing = async (req, res) => {
             };
         }
 
-        if (condition) {
-            filter.condition = condition;
-        }
-
-        // add if searching
-        if (search) {
-            filter.name = {
-                $regex: search,
-                $options: "i",
-            };
-        }
-
         const products = await Listing.find(filter);
 
-        res.status(200).json({
+        return res.status(200).json({
             success: true,
             count: products.length,
             data: products,
@@ -65,4 +70,4 @@ export const soListing = async (req, res) => {
             message: error.message,
         });
     }
-}
+};

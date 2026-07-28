@@ -11,10 +11,10 @@ import { submitLoginData } from './reducers/features/auth/login'
 import { getLocation, getPopUpLocation } from './reducers/features/location/locationCoordinates'
 import { getLocationName } from './reducers/features/locationSlice'
 import { getWishlist } from './reducers/features/wishlist/wishlisSlice'
-import { getCart } from './reducers/features/cart/cartSlice'
 import SocketListener from './components/SocketListener'
 import { fetchNotifications } from './reducers/features/notification/notificationSlice'
 import { Toaster } from 'react-hot-toast'
+import { socket } from './socket/socket'
 
 
 const App = () => {
@@ -30,6 +30,13 @@ const App = () => {
   }, [])
 
   const user = useSelector((state) => state.signup.user || state.login.user);
+
+  useEffect(() => {
+    if (user?._id) {
+      socket.emit("register-user", user._id);
+    }
+  }, [user]);
+
 
   useEffect(() => {
     if (user?.location?.coordinates) {
@@ -65,14 +72,6 @@ const App = () => {
       dispatch(getWishlist());
     }
   }, [user]);
-
-  //getCart
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      dispatch(getCart());
-    }
-  }, [user]);
-
 
   //theme
   const theme = useSelector((state) => state.theme.mode);

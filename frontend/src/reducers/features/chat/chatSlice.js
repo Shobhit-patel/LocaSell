@@ -45,9 +45,26 @@ const chatSlice = createSlice({
         },
 
         addMessage: (state, action) => {
-            state.messages.push(
-                action.payload
+            const msg = action.payload;
+        
+            state.messages.push(msg);
+        
+            const index = state.chats.findIndex(
+                chat => chat._id === msg.chat
             );
+        
+            if (index !== -1) {
+                state.chats[index].lastMessage = msg.text;
+                state.chats[index].lastMessageAt = msg.createdAt;
+        
+                // Move updated chat to top
+                const updatedChat = state.chats.splice(index, 1)[0];
+                state.chats.unshift(updatedChat);
+        
+                if (state.activeChat?._id === msg.chat) {
+                    state.activeChat = updatedChat;
+                }
+            }
         }
     },
     extraReducers: (builder) => {

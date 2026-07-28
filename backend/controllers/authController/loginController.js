@@ -61,7 +61,6 @@ export const login = async (req, res, next) => {
                 averageRating: existingUser.averageRating,
                 reviewCount: existingUser.reviewCount,
                 wishlist: existingUser.wishlist,
-                addToCart: existingUser.addToCart,
                 soldItem: existingUser.soldItem,
                 activeItem: existingUser.activeItem,
                 responsePercent: existingUser.responsePercent,

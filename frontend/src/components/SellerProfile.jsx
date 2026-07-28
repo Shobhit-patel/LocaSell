@@ -3,7 +3,6 @@ import { setOpen } from '../reducers/features/popup/sellerPopup'
 import { useDispatch } from 'react-redux'
 import { MapContainer, TileLayer, useMap, useMapEvents } from 'react-leaflet'
 import { getPopUpLocation } from '../reducers/features/location/locationCoordinates';
-import Rating from './Rating';
 import close from '../assets/icons/close.png'
 import star from '../assets/icons/star.png'
 
@@ -121,11 +120,6 @@ const SellerProfile = ({ seller }) => {
                         </div>
                     </div>
 
-                    <div>
-                        <span className='text-h1'>Rate user</span>
-                        <Rating sellerId={seller?._id} />
-                    </div>
-
                     {/* map */}
                     {center && (
                         <MapContainer center={center} attributionControl={false} zoom={13} className="z-10 mt-5 h-[250px] w-full rounded-xl border border-border dark:border-gray-700 " >
@@ -138,7 +132,7 @@ const SellerProfile = ({ seller }) => {
                     )}
 
                     {/* Fixed center pin */}
-                    <div className='absolute lg:top-112 lg:left-[46.5%] top-112 left-[45%] z-30 text-4xl '  >
+                    <div className='absolute lg:top-98 lg:left-[46.5%] top-98 left-[46.5%] z-30 text-4xl '  >
                         📍
                     </div>
                 </div>

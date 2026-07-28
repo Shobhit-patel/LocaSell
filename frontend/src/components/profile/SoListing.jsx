@@ -4,6 +4,7 @@ import WishlistButton from '../WishlistButton';
 import { useNavigate } from 'react-router-dom'
 import { submitSoOneListingData } from '../../reducers/features/listing/soOneListing'
 import hamburger from '../../assets/icons/hamburger.png'
+import { setImagePopupOpen } from '../../reducers/features/imagePopupSlice'
 
 const SoListing = ({ setSidebarOpen }) => {
     const navigate = useNavigate()
@@ -35,7 +36,7 @@ const SoListing = ({ setSidebarOpen }) => {
 
         return (R * c).toFixed(2);
     }
-    
+
     if (product?.length == 0) {
         return (
             <div className='flex-1 text-center'>
@@ -57,7 +58,8 @@ const SoListing = ({ setSidebarOpen }) => {
                     product?.map((item) => (
                         <div onClick={() => {
                             dispatch(submitSoOneListingData(item?._id))
-                            navigate('/product-details')
+                            navigate(`/product-details/${item?._id}`)
+                            dispatch(setImagePopupOpen(false))
                         }} key={item?._id} className='border border-border rounded-xl cursor-pointer max-w-2xs'>
                             <div className='flex justify-center items-center bg-secondary h-40 relative overflow-hidden rounded-t-xl'>
                                 <img className='h-40 w-80 ' src={item?.image?.[0]} alt={item?.name} />
@@ -72,7 +74,9 @@ const SoListing = ({ setSidebarOpen }) => {
                                     <span className='text-h4 text-gray-400'>{calculateDistance(user.lat, user.lng, item?.location?.coordinates?.[1], item?.location?.coordinates?.[0])} km</span>
                                     <span className='text-h6 bg-primary text-white rounded-full pt-0.5 pr-1.5 pb-0.5 pl-1.5'>{item?.condition}</span>
                                 </div>
-                                <WishlistButton product={item} />
+                                <div className="absolute -top-36 right-5 " onClick={(e) => e.stopPropagation()}>
+                                    <WishlistButton product={item} />
+                                </div>
                             </div>
                         </div>
                     ))

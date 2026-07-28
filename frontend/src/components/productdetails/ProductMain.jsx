@@ -6,6 +6,9 @@ import ImagePopup from '../ImagePopup'
 import { setImagePopupOpen, setImageUrl } from '../../reducers/features/imagePopupSlice'
 import right from '../../assets/icons/right.png'
 import hamburger from '../../assets/icons/hamburger.png'
+import WishlistButton from '../WishlistButton'
+import rightArrow from '../../assets/icons/right.svg'
+import leftArrow from '../../assets/icons/left.svg'
 
 const ProductMain = ({ setSidebarOpen }) => {
     const navigate = useNavigate()
@@ -13,13 +16,7 @@ const ProductMain = ({ setSidebarOpen }) => {
 
     const product = useSelector((state) => state.soOneListing?.soOneListingProduct)
 
-    const [preview, setPreview] = useState(null);
-
-    useEffect(() => {
-        if (product?.image?.length) {
-            setPreview(product.image[0]);
-        }
-    }, [product]);
+    const [count, setCount] = useState(0);
 
     useEffect(() => {
         if (product?.seller) {
@@ -113,22 +110,42 @@ const ProductMain = ({ setSidebarOpen }) => {
                     </button>
                 </div>
 
-
-
                 <div onClick={() => {
                     dispatch(setImagePopupOpen(true))
-                    dispatch(setImageUrl(preview))
+                    dispatch(setImageUrl(product?.image?.[count]))
                 }} className='flex justify-center items-center border border-border relative rounded-xl cursor-pointer overflow-hidden h-70 mt-5 bg-secondary'>
+                    <div className='absolute top-5 right-5 z-5' onClick={(e) => e.stopPropagation()}>
+                        <WishlistButton product={product} />
+                    </div>
+
+                    <div className='absolute left-2 sm:left-5 z-5' onClick={(e) => e.stopPropagation()}>
+                        {
+                            count !== 0 &&
+                            <img onClick={() => setCount(count - 1)} className=' w-7 sm:w-10 md:w-12' src={leftArrow} alt="arrow" />
+                        }
+                    </div>
+                    <div className='absolute right-2 sm:right-5 z-5' onClick={(e) => e.stopPropagation()}>
+                        {
+                            count !== product?.image?.length - 1 &&
+                            <img onClick={() => setCount(count + 1)} className='w-7 sm:w-10 md:w-12' src={rightArrow} alt="arrow" />
+                        }
+                    </div>
+
                     {product?.status === 'sold' &&
                         <div className='absolute flex justify-center items-center w-full h-70 text-3xl bg-white/60'>Sold</div>
                     }
-                    <img className='h-69.5' src={preview} alt={product?.name} />
+
+                    <img className='h-69.5' src={product?.image?.[count]} alt={product?.name} />
                 </div>
 
                 <div className='flex mt-2.5 gap-2.5 '>
                     {
                         product?.image?.map((i, key) => (
-                            <div key={key} onClick={() => setPreview(i)} className='bg-secondary border border-border hover:border-1 hover:border-primary rounded-xl cursor-pointer place-items-center w-fit h-20'>
+                            <div key={key} onClick={() => setCount(key)} className={`bg-secondary rounded-xl cursor-pointer place-items-center w-fit h-20.5 border transition-all duration-200 ${count === key
+                                ? "border-primary "
+                                : "border-border hover:border-primary"
+                                }`}
+                            >
                                 <img className='h-19.5 overflow-hidden rounded-xl' src={i} alt="product" />
                             </div>
                         ))
@@ -141,41 +158,37 @@ const ProductMain = ({ setSidebarOpen }) => {
                 </div>
 
                 <div>
-                    <span className='text-heading font-medium'>{product?.name}</span>
+                    <span className='text-logo font-medium'>{product?.name}</span>
                 </div>
 
                 <div className='flex gap-2 mt-2.5'>
                     <button className='text-h3 border border-border rounded-xl py-0.5 px-3'>{product?.category}</button>
-                    <button className='text-h3 border border-border rounded-xl py-0.5 px-3'>{calculateDistance(user?.lat, user?.lng, product?.location?.coordinates?.[1], product?.location?.coordinates?.[0])} km · {sellerLocation}</button>
+                    {
+                        location.lat !== 0 && location.lng !== 0 ?
+                            <button className='text-h3 border border-border rounded-xl py-0.5 px-3'>{calculateDistance(user?.lat, user?.lng, product?.location?.coordinates?.[1], product?.location?.coordinates?.[0])} km · {sellerLocation}</button>
+                            :
+                            <button className='text-h3 border border-border rounded-xl py-0.5 px-3'>{sellerLocation}</button>
+                    }
                     <button className='text-h3 border border-border rounded-xl py-0.5 px-3'>Listed {getTimeLabel(product?.createdAt)}</button>
                 </div>
 
 
                 <div className='text-h1 mt-5'>
-                    <span>{product?.description}</span>
+                    <div className='grid'>
+                        <span className='text-h1 text-gray-500 font-medium'>Description</span>
+                        <span className='text-h1'>{product?.description}</span>
+                    </div>
 
-                    <div className='flex items-center mt-5'>
-                        <div className='grid gap-5 m-4 w-full'>
-                            <div className='grid'>
-                                <span className='text-h4 text-gray-500 font-medium'>Brand</span>
-                                <span className='text-h2'>{product?.brand}</span>
+                    <div className='grid grid-cols-2  mt-5'>
+                        {Object.entries(product?.categoryData || {}).map(([key, value]) => (
+                            <div key={key}>
+                                <div className='grid mb-3'>
+                                    <span className='text-h4 text-gray-500 font-medium'>{key}</span>
+                                    <span className='text-h2'>{value}</span>
+                                </div>
                             </div>
-                            <div className='grid'>
-                                <span className='text-h4 text-gray-500 font-medium'>Age</span>
-                                <span className='text-h2'>{product?.product_age}</span>
-                            </div>
-                        </div>
+                        ))}
 
-                        <div className='grid gap-5 m-4 w-full'>
-                            <div className='grid'>
-                                <span className='text-h4 text-gray-500 font-medium'>Model</span>
-                                <span className='text-h2'>{product?.model}</span>
-                            </div>
-                            <div className='grid'>
-                                <span className='text-h4 text-gray-500 font-medium'>Original price</span>
-                                <span className='text-h2'>₹ {product?.original_price}</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

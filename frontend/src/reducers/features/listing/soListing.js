@@ -7,7 +7,10 @@ export const submitSoListingData = createAsyncThunk(
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/listings`,
                 {
-                    params: soListingData
+                    params: soListingData,
+                    paramsSerializer: {
+                        indexes: null
+                    }
                 }
             );
             return response?.data;
@@ -30,7 +33,7 @@ const initialState = {
         category: 'All listings',
         price: 100000,
         radius: 5,
-        condition: '',
+        condition: [],
         latitude: null,
         longitude: null,
         search: ''

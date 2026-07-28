@@ -71,17 +71,15 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }) => {
 
     const conditions = [
         { id: 'CO1', condition: 'New' },
-        { id: 'CO2', condition: 'Like new' },
-        { id: 'CO3', condition: 'Good' },
-        { id: 'CO4', condition: 'Fair' },
-        { id: 'CO5', condition: 'For parts' },
+        { id: 'CO2', condition: 'Good' },
+        { id: 'CO3', condition: 'Old' },
     ]
 
     const resetFilter = () => {
         toast.success('Filter reset');
         dispatch(setFilter({
             category: "All listings",
-            condition: "",
+            condition: [],
             latitude: location?.lat,
             longitude: location?.lng,
             price: 100000,
@@ -158,7 +156,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }) => {
                                             })
                                         );
                                     }}
-                                        key={dis.id} className={`text-h4 border border-border hover:bg-black hover:text-white rounded-xl cursor-pointer hover:border-black dark:hover:bg-white dark:hover:text-black pt-1 pr-2.5 pb-1 pl-2.5 ${filters.radius === dis.distance ? 'bg-black text-white dark:bg-white dark:text-black' : null} `}>{dis.distance} km</button>
+                                        key={dis.id} className={`text-h4 border border-border hover:bg-primary hover:text-white rounded-xl cursor-pointer hover:border-primary dark:hover:bg-primary dark:hover:text-black pt-1 pr-2.5 pb-1 pl-2.5 ${filters.radius === dis.distance ? 'bg-primary text-white border-primary dark:bg-primary dark:text-black' : null} `}>{dis.distance} km</button>
                                 ))
                             }
                         </div>
@@ -168,26 +166,37 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }) => {
                     <div className='mt-1 mb-2'>
                         <span className='text-gray-500 text-h5 font-semibold'>CONDITION</span>
                         <div className='text-h2 mt-1'>
-                            {
-                                conditions.map((con) => (
-                                    <div key={con.id} className='flex items-center gap-2'>
-                                        <input onChange={() => {
+                            {conditions.map((con) => (
+                                <div key={con.id} className="flex items-center gap-2">
+                                    <input
+                                        id={con.id}
+                                        type="checkbox"
+                                        checked={filters.condition.includes(con.condition)}
+                                        onChange={(e) => {
+                                            let updatedConditions;
+
+                                            if (e.target.checked) {
+                                                updatedConditions = [...filters.condition, con.condition];
+                                            } else {
+                                                updatedConditions = filters.condition.filter(
+                                                    (item) => item !== con.condition
+                                                );
+                                            }
+
                                             dispatch(
                                                 setFilter({
-                                                    condition: con.condition
+                                                    condition: updatedConditions,
                                                 })
-                                            )
-                                        }} checked={filters.condition == con.condition} className={`${filters.condition == con.condition ? 'accent-primary' : null} `} id={con.id} type='checkbox' />
-                                        <label onClick={() => {
-                                            dispatch(
-                                                setFilter({
-                                                    condition: con.condition
-                                                })
-                                            )
-                                        }} className='cursor-pointer' htmlFor={con.id}>{con.condition}</label>
-                                    </div>
-                                ))
-                            }
+                                            );
+                                        }}
+                                        className="accent-primary"
+                                    />
+
+                                    <label htmlFor={con.id} className="cursor-pointer">
+                                        {con.condition}
+                                    </label>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div onClick={resetFilter} className='bg-primary text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-4 pt-3 pb-3'>

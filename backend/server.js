@@ -9,9 +9,8 @@ import initializeSocket from './socket/socket.js';
  
 import userRoutes from './routes/userRoutes.js' 
 import listingRoutes from './routes/listingRoutes.js'
-import chatRoutes from './routes/chatRoutes.js' 
+import chatRoutes from './routes/chatRoutes.js'  
 import wishlistRoutes from './routes/wishListRoutes.js'
-import cartRoutes from './routes/cartRoute.js' 
 import notificationRoutes from './routes/notificationRoutes.js'
 import ratingRoutes from './routes/ratingRoute.js'
 
@@ -21,7 +20,7 @@ const app = express()
 
 const server = http.createServer(app);
 
-app.use(cors({ origin: 'https://loca-sell.vercel.app', }));
+app.use(cors({ origin: 'http://localhost:5173', }));
 
 app.use(express.json())
 
@@ -31,7 +30,6 @@ app.use("/api/auth", userRoutes);
 app.use("/api", listingRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/wishlist", wishlistRoutes);
-app.use("/api/cart", cartRoutes);
 app.use("/api/notification", notificationRoutes);
 app.use("/api/rating", ratingRoutes);
 

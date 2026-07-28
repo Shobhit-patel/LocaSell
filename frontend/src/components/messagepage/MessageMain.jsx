@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ChatBox from './ChatBox'
 import { useDispatch, useSelector } from 'react-redux'
 import { socket } from '../../socket/socket';
@@ -19,9 +19,17 @@ const MessageMain = ({ setSidebarOpen }) => {
 
   const listing = useSelector(state => state.soListing.soListing)
   const singleProduct = listing?.find((product) => product?._id === seller?.Product?._id)
+  const onlineUsers = useSelector(state => state.onlineUsers.users);
+
+  const otherUserId =
+    seller?.seller?._id === user?._id
+      ? seller?.buyer?._id
+      : seller?.seller?._id;
+
+  const isOnline = onlineUsers.includes(otherUserId);
 
   const send = () => {
-    if (!text) return;
+    if (!text.trim()) return;
 
     const chat = seller;
 
@@ -36,7 +44,7 @@ const MessageMain = ({ setSidebarOpen }) => {
         sender: user._id,
         receiver: receiverId,
         type: "text",
-        text
+        text: text.trim()
       }
     );
     setText("");
@@ -94,14 +102,18 @@ const MessageMain = ({ setSidebarOpen }) => {
                 :
                 <span className='text-h2 font-medium'>{seller?.buyer?.firstName} {seller?.buyer?.lastName}</span>
             }
-            <span className='text-h4 text-primary'>Online know</span>
+            <span
+              className={`text-h4 ${isOnline ? 'text-primary' : 'text-gray-500'}`} >
+              {isOnline ? 'Online' : 'Offline'}
+            </span>
+
           </div>
         </div>
 
         <div className='flex justify-between items-center gap-5'>
           <button onClick={() => {
             dispatch(submitSoOneListingData(seller?.Product?._id))
-            navigate('/product-details')
+            navigate(`/product-details/${seller?.Product?._id}`)
           }} className='border border-border 400 hover:border-primary hover:bg-primary hover:text-white text-h3 px-3 py-1 rounded-xl cursor-pointer'>Product details</button>
 
           <button className='  lg:hidden text-right '>
@@ -143,10 +155,15 @@ const MessageMain = ({ setSidebarOpen }) => {
       </div>
       {seller?.Product?.status === 'active' ?
         <div className='flex sticky bottom-0 gap-2.5 border-b border-border dark:border-gray-400 bg-white dark:bg-gray-900 px-5 py-3 transition-colors duration-300'>
-          <input onChange={e => setText(e.target.value)} type="text" value={text} placeholder='Type a message...' className='h-10 p-3 text-h1 w-full border border-gray-400 dark:border-gray-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 outline-none rounded-xl' />
-          <div onClick={send} className='flex justify-center items-center w-20 h-10 bg-primary text-white border border-primary rounded-xl cursor-pointer'>
+          <input onChange={e => setText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                send();
+              }
+            }} type="text" value={text} placeholder='Type a message...' className='h-10 p-3 text-h1 w-full border border-gray-400 dark:border-gray-400 bg-white dark:bg-gray-800 text-black dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400 outline-none rounded-xl' />
+          <button onClick={send} className='flex justify-center items-center w-20 h-10 bg-primary text-white border border-primary rounded-xl cursor-pointer'>
             <img className='w-5 h-5 invert-100 dark:invert-0' src={sendicon} alt="" />
-          </div>
+          </button>
         </div>
         :
         <div className='flex-1 text-center py-5'>

@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { clearMessage, toggleWishlist } from "../reducers/features/wishlist/wishlisSlice";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
+import { toggleWishlist } from "../reducers/features/wishlist/wishlisSlice";
 import loader from '../assets/icons/loader.png'
 import heartA from '../assets/icons/heartA.png'
 import heartNA from '../assets/icons/heartNA.png'
+import { setIsOpen } from "../reducers/features/popup/loginPopup";
 
 const WishlistButton = ({ product }) => {
     const dispatch = useDispatch();
     const productId = product?._id;
 
-    const { wishlist, message, loading, loadingProductId } = useSelector((state) => state.wishlist);
+    const token = localStorage.getItem("token");
+
+    const { wishlist, loading, loadingProductId } = useSelector((state) => state.wishlist);
     const isLoading = loading && loadingProductId === productId;
 
     const isWishlisted = wishlist.some((item) => {
@@ -23,18 +24,13 @@ const WishlistButton = ({ product }) => {
             productId,
             product
         }));
+        if (!token) {
+            dispatch(setIsOpen(true));
+        }
     };
 
-    useEffect(() => {
-        if (!message) return;
-
-        toast.success(message, { id: "wishlist-toast", });
-
-        dispatch(clearMessage());
-    }, [message, dispatch]);
-
     return (
-        <button className='cursor-pointer absolute bg-white border border-border rounded-full p-1.5 right-5 -top-36' onClick={handleClick}>
+        <button className='cursor-pointer bg-white border border-border rounded-full p-1.5' onClick={handleClick}>
             {isWishlisted ? (
                 isLoading ? (
                     <img className="w-5.5 animate-spin" src={loader} alt="" />

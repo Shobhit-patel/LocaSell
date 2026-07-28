@@ -23,7 +23,7 @@ const ratingSchema = new mongoose.Schema(
 
     review: {
       type: String,
-      default: "",
+      trim: true,
     },
   },
   {
@@ -31,7 +31,6 @@ const ratingSchema = new mongoose.Schema(
   }
 );
 
-// One user can rate another user only once
 ratingSchema.index({ reviewer: 1, seller: 1 }, { unique: true });
 
 export default mongoose.model("Rating", ratingSchema);

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Circle, MapContainer, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { getLocation, getPopUpLocation } from "../reducers/features/location/loc
 import { editProfile } from "../reducers/features/auth/login";
 import toast from "react-hot-toast";
 import close from '../assets/icons/close.png'
+import Loading from "./Loading";
 
 function MapEvents({ dispatch }) {
     useMapEvents({
@@ -37,6 +38,8 @@ const PopupMap = () => {
     const location = useSelector((state) => state.locationCoordinates?.currPopUpLocation)
     const locationName = useSelector((state) => state.location?.currPopUpLocationName)
 
+    const [loading, setLoading] = useState(false)
+
     useEffect(() => {
         if (!location?.lat || !location?.lng) return;
 
@@ -58,7 +61,7 @@ const PopupMap = () => {
     );
 
     const handleApply = useCallback(() => {
-        toast.success("Location applied successfully");
+        setLoading(true)
 
         dispatch(getLocationName(locationName));
         dispatch(getLocation(location));
@@ -68,7 +71,12 @@ const PopupMap = () => {
             longitude: location.lng,
         }));
 
-        dispatch(setOpen(false));
+        toast.success("Location applied successfully");
+
+        setTimeout(() => {
+            setLoading(false)
+            dispatch(setOpen(false));
+        }, 900);
     }, [dispatch, location, locationName]);
 
     return (
@@ -109,7 +117,14 @@ const PopupMap = () => {
                         <span className="text-gray-600 dark:text-gray-300">{locationName}</span>
                     </div>
 
-                    <button onClick={handleApply} className="bg-primary w-full text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer pt-3 pb-3">Apply</button>
+                    <button onClick={handleApply} className="bg-primary w-full text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer pt-3 pb-3">
+                        {
+                            loading ?
+                                <Loading />
+                                :
+                                <span>Apply</span>
+                        }
+                    </button>
                 </div>
             </div>
         </div>

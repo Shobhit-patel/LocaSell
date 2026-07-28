@@ -64,11 +64,6 @@ const userSchema = new mongoose.Schema(
             default: [],
         },
 
-        addToCart: {
-            type: Array,
-            default: [],
-        },
-
         soldItem: {
             type: Number,
             default: 0,

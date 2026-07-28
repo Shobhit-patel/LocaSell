@@ -27,18 +27,41 @@ export const submitRating = createAsyncThunk(
     }
 );
 
+
+export const getSellerRatings = createAsyncThunk(
+    "rating/getSellerRatings",
+    async (sellerId, thunkAPI) => {
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/rating/${sellerId}`
+            );
+
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data?.message || "Something went wrong"
+            );
+        }
+    }
+);
+
+
+
 const ratingSlice = createSlice({
     name: "rating",
     initialState: {
         loading: false,
         success: false,
         error: null,
+
+        seller: null,
+        ratings: [],
     },
 
     reducers: {},
 
     extraReducers: (builder) => {
         builder
+
             .addCase(submitRating.pending, (state) => {
                 state.loading = true;
                 state.success = false;
@@ -51,6 +74,23 @@ const ratingSlice = createSlice({
             })
 
             .addCase(submitRating.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+
+
+            .addCase(getSellerRatings.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+
+            .addCase(getSellerRatings.fulfilled, (state, action) => {
+                state.loading = false;
+                state.seller = action.payload.seller;
+                state.ratings = action.payload.ratings;
+            })
+
+            .addCase(getSellerRatings.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });

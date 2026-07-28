@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import SoProfile from './SoProfile'
 import SoListing from './SoListing'
 import SoWishlist from './SoWishlist'
-import SoCart from './SoCart'
 
 const ProfileMain = ({ setSidebarOpen }) => {
     const isActive = useSelector((state) => state.profile.isActive)
@@ -23,11 +22,6 @@ const ProfileMain = ({ setSidebarOpen }) => {
                 }
                 {isActive === 'wishlist' ?
                     <SoWishlist setSidebarOpen={setSidebarOpen} />
-                    :
-                    null
-                }
-                {isActive === 'cart' ?
-                    <SoCart setSidebarOpen={setSidebarOpen} />
                     :
                     null
                 }

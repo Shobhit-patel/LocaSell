@@ -5,6 +5,7 @@ import SoMap from './SoMap'
 import { submitSoOneListingData } from '../../reducers/features/listing/soOneListing'
 import WishlistButton from '../WishlistButton'
 import hamburger from '../../assets/icons/hamburger.png'
+import { setImagePopupOpen } from '../../reducers/features/imagePopupSlice'
 
 const Main = ({ setSidebarOpen }) => {
     const navigate = useNavigate()
@@ -17,6 +18,8 @@ const Main = ({ setSidebarOpen }) => {
     const filters = useSelector((state) => state.soListing?.filter)
 
     const location = useSelector((state) => state.locationCoordinates.currLocation)
+
+    const token = localStorage.getItem("token");
 
     // calculate distance from user
     const user = {
@@ -53,14 +56,23 @@ const Main = ({ setSidebarOpen }) => {
                             <button className=' block lg:hidden '>
                                 <img onClick={() => setSidebarOpen(true)} className='w-5 inline-block cursor-pointer dark:invert-100 ' src={hamburger} alt="" />
                             </button>
-                            <span className='text-h2 font-semibold'>Nearby listings</span>
+                            {
+                                token ?
+                                    <span className='text-h2 font-semibold'>Nearby listings</span>
+                                    :
+                                    <span className='text-h2 font-semibold'>All listings</span>
+                            }
                         </div>
                     </div>
-
-                    <div className='text-h3 text-gray-500'>{filteredProducts?.length || 0} results within {filters?.radius} km</div>
+                    {
+                        location.lat !== 0 && location.lng !== 0 ?
+                            <div className='text-h3 text-gray-500'>{filteredProducts?.length || 0} results within {filters?.radius} km</div>
+                            :
+                            <div className='text-h3 text-gray-500'>{filteredProducts?.length || 0} results</div>
+                    }
                 </div>
 
-                  {
+                {
                     location.lat === 0 && location.lng === 0 ?
                         null
                         :
@@ -72,22 +84,30 @@ const Main = ({ setSidebarOpen }) => {
                         filteredProducts?.map((item) => (
                             <div onClick={() => {
                                 dispatch(submitSoOneListingData(item?._id))
-                                navigate(`/product-details/${item?._id}`);
+                                navigate(`/product-details/${item?._id}`)
+                                dispatch(setImagePopupOpen(false))
                             }} key={item?._id} className='border border-border rounded-xl cursor-pointer max-w-2xs'>
                                 <div className='flex justify-center items-center bg-secondary relative h-40 overflow-hidden rounded-t-xl'>
-                                    <img className='h-40 w-80 ' src={item?.image?.[0]} alt={item?.name} />
+                                    <img className='h-40 w-80' src={item?.image?.[0]} alt={item?.name} />
                                     {item?.status === 'sold' &&
                                         <div className='absolute flex justify-center items-center top-0 rounded-t-xl w-full h-full text-2xl bg-white/60'>Sold</div>
                                     }
                                 </div>
-                                <div onClick={(e) => e.stopPropagation()} className='grid p-3 relative'>
+                                <div className='grid p-3 relative'>
                                     <span className='text-[16px] text-primary font-bold'>₹ {item?.price}</span>
                                     <span className='text-h3 font-medium'>{item?.name}</span>
                                     <div className='flex justify-between items-center mt-1'>
-                                        <span className='text-h4 text-gray-400'>{calculateDistance(user.lat, user.lng, item.location.coordinates?.[1], item.location.coordinates?.[0])} km</span>
+                                        {
+                                            location.lat !== 0 && location.lng !== 0 ?
+                                                <span className='text-h4 text-gray-400'>{calculateDistance(user.lat, user.lng, item.location.coordinates?.[1], item.location.coordinates?.[0])} km</span>
+                                                :
+                                                <div className='text-h3 text-gray-500'>Set Location</div>
+                                        }
                                         <span className='text-h6 bg-primary text-white rounded-full pt-0.5 pr-1.5 pb-0.5 pl-1.5'>{item?.condition}</span>
                                     </div>
-                                    <WishlistButton product={item} />
+                                    <div className="absolute -top-36 right-5 " onClick={(e) => e.stopPropagation()}>
+                                        <WishlistButton product={item} />
+                                    </div>
                                 </div>
                             </div>
                         ))

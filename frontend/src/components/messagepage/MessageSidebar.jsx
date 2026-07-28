@@ -6,7 +6,7 @@ const MessageSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     const dispatch = useDispatch()
 
     const { chats } = useSelector(state => state.chat);
-
+    
     const user = useSelector((state) => state.signup.user || state.login.user);
 
     useEffect(() => {

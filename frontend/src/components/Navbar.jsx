@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import PopupMap from './PopupMap'
@@ -17,9 +17,6 @@ const Navbar = () => {
 
     // to open map popup
     const open = useSelector((state) => state.mapPopup.open)
-
-    //to set our seaching range
-    const radius = useSelector((state) => state.soListing.filter?.radius) || 5
 
     //to set location name on button
     const locName = useSelector((state) => state.location.currLocationName) || ''
@@ -57,26 +54,26 @@ const Navbar = () => {
         })
     }
 
-    const [setSearch, setSetSearch] = useState('')
+    const [search, setSearch] = useState("");
 
     const handleSearch = (e) => {
-        setSetSearch(e.target.value)
-    }
-
-    const sendSearch = (e) => {
-        if (e.key === "Enter") {
-            dispatch(setFilter({ search: setSearch }));
-            setSetSearch('')
-            navigate('/')
-        }
-    }
+        setSearch(e.target.value);
+    };
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            dispatch(setFilter({ search }));
+        }, 500); 
+    
+        return () => clearTimeout(timer);
+    }, [search, dispatch]);
 
 
     return (
         <>
             <nav className="flex justify-between items-center gap-4 z-10 px-5 py-3 border-b border-border sticky top-0 bg-white dark:bg-gray-900 dark:border-gray-400 transition-colors duration-300">
                 {/* nav left */}
-                <div className='flex w-190 items-center gap-4'>
+                <div className='flex w-180 items-center gap-4'>
                     <div onClick={() => navigate('/')} className='w-35  max-sm:hidden '>
                         <span className='text-primary text-logo font-extrabold font-stretch-200% cursor-pointer'>Loca</span>
                         <span className='text-logo font-extrabold font-stretch-200% cursor-pointer'>Sell</span>
@@ -88,14 +85,14 @@ const Navbar = () => {
                     </div>
 
                     <div className="border border-border dark:border-gray-400 rounded-xl flex-1 min-w-50 bg-white dark:bg-gray-800 lg:block md:hidden sm:hidden max-sm:hidden">
-                        <input onKeyDown={sendSearch} onChange={handleSearch} value={setSearch} className='outline-none cursor-pointer text-h2 py-2 px-5 w-full rounded-xl bg-white text-black dark:bg-gray-800 dark:text-white'
-                            type="search" placeholder='Search items, categories...' />
+                        <input onClick={()=> navigate('/')} onChange={handleSearch} value={search} className='outline-none cursor-pointer text-h2 py-2 px-5 w-full rounded-xl bg-white text-black dark:bg-gray-800 dark:text-white'
+                            type="search" placeholder='Search items...' />
                     </div>
 
                     <div onClick={() => {
                         getCurrLocation()
                         dispatch(setOpen(true))
-                    }} className='bg-secondary w-fit text-center text-text-dark border border-border rounded-xl cursor-pointer text-h2 pt-2 pl-4 pb-2 pr-4 lg:block md:hidden sm:hidden max-sm:hidden'>{soMainLocName} · {radius} km</div>
+                    }} className='bg-secondary w-fit text-center text-text-dark border border-border rounded-xl cursor-pointer text-h2 pt-2 pl-4 pb-2 pr-4 lg:block md:hidden sm:hidden max-sm:hidden'>{soMainLocName}</div>
                 </div>
 
                 {/* nav right */}
@@ -117,14 +114,14 @@ const Navbar = () => {
             {/* responsive */}
             <div className='lg:hidden w-full grid grid-cols-1 md:grid-cols-2 gap-2.5 px-5 py-3 border-b border-border '>
                 <div className="border border-border dark:border-gray-400 rounded-xl w-full bg-white dark:bg-gray-800">
-                    <input onKeyDown={sendSearch} onChange={handleSearch} value={setSearch} className='outline-none cursor-pointer text-h2 py-2 px-5 w-full rounded-xl bg-white text-black dark:bg-gray-800 dark:text-white'
-                        type="search" placeholder='Search items, categories...' />
+                    <input onClick={()=> navigate('/')} onChange={handleSearch} value={search} className='outline-none cursor-pointer text-h2 py-2 px-5 w-full rounded-xl bg-white text-black dark:bg-gray-800 dark:text-white'
+                        type="search" placeholder='Search items' />
                 </div>
 
                 <div onClick={() => {
                     getCurrLocation()
                     dispatch(setOpen(true))
-                }} className='bg-secondary w-full text-center text-text-dark border border-border rounded-xl cursor-pointer text-h2 pt-2 pl-4 pb-2 pr-4'>{soMainLocName} · {radius} km</div>
+                }} className='bg-secondary w-full text-center text-text-dark border border-border rounded-xl cursor-pointer text-h2 pt-2 pl-4 pb-2 pr-4'>{soMainLocName}</div>
             </div>
 
 

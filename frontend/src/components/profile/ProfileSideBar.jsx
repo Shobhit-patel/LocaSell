@@ -63,11 +63,6 @@ const ProfileSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                         }} className={`hover:bg-secondary dark:hover:text-text-dark px-5 py-1 rounded-xl text-h2 cursor-pointer ${isActive === 'wishlist' ? 'bg-secondary text-text-dark' : null}`}>Wishlist</span>
 
                         <span onClick={() => {
-                            dispatch(setIsActive('cart'))
-                            setSidebarOpen(false)
-                        }} className={`hover:bg-secondary dark:hover:text-text-dark px-5 py-1 rounded-xl text-h2 cursor-pointer ${isActive === 'cart' ? 'bg-secondary text-text-dark' : null}`}>Cart</span>
-
-                        <span onClick={() => {
                             dispatch(setIsActive('messageSeller'))
                             navigate('/message-seller')
                             setSidebarOpen(false)

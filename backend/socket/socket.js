@@ -8,7 +8,7 @@ const onlineUsers = new Map();
 const initializeSocket = (server) => {
     const io = new Server(server, {
         cors: {
-            origin: "https://loca-sell.vercel.app",
+            origin: "http://localhost:5173",
             credentials: true,
         },
     });
@@ -24,6 +24,15 @@ const initializeSocket = (server) => {
         // Add this
         socket.on("register-user", (userId) => {
             onlineUsers.set(userId, socket.id);
+
+            socket.userId = userId;
+
+            socket.emit("online-users", [...onlineUsers.keys()]);
+
+            io.emit("user-status", {
+                userId,
+                online: true,
+            });
         });
 
         // send message
@@ -52,26 +61,16 @@ const initializeSocket = (server) => {
 
                 io.to(chatId).emit("receive-message", populatedMessage);
 
-                // always save notification (offline support)
-                await Notification.create({
-                    receiver,
-                    sender,
-                    chatId,
-                    text: type === "location" ? " Shared Location" : text,
-                    seen: false,
-                });
-
-                // Notify only the receiver
+                // Check if receiver is online
                 const receiverSocketId = onlineUsers.get(receiver);
 
-                if (receiverSocketId) {
-
-                    io.to(receiverSocketId).emit("notification", {
-                        chatId,
+                if (!receiverSocketId) {
+                    await Notification.create({
+                        receiver,
                         sender,
-                        type,
-                        text: type === "location" ? "Shared Location" : text,
-                        location,
+                        chatId,
+                        text: type === "location" ? " Shared Location" : text,
+                        seen: false,
                     });
                 }
 
@@ -81,12 +80,15 @@ const initializeSocket = (server) => {
         });
 
         socket.on("disconnect", () => {
-            for (const [userId, socketId] of onlineUsers.entries()) {
-                if (socketId === socket.id) {
-                    onlineUsers.delete(userId);
-                    break;
-                }
+            if (socket.userId) {
+                onlineUsers.delete(socket.userId);
+
+                io.emit("user-status", {
+                    userId: socket.userId,
+                    online: false,
+                });
             }
+
             console.log("User disconnected:", socket.id);
         });
     });

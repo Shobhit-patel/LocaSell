@@ -14,6 +14,7 @@ import loginPopupReducer from './features/popup/loginPopup'
 import mapPopupReducer from './features/popup/mapPopup'
 import sellerPopupReducer from './features/popup/sellerPopup'
 import editPopupReducer from './features/popup/editPopup'
+import ratingPopupReducer from './features/popup/ratingPopup'
 
 //profile
 import profileReducer from './features/active/profile'
@@ -29,9 +30,6 @@ import locationCoordinatesReducer from './features/location/locationCoordinates'
 //wishlist
 import wishlistReducer from './features/wishlist/wishlisSlice'
 
-//cart
-import cartReducer from './features/cart/cartSlice'
-
 //chat
 import chatReducer from './features/chat/chatSlice'
 
@@ -43,6 +41,9 @@ import notificationReducer from './features/notification/notificationSlice'
 
 // rating
 import ratingReducer from './features/rating/ratingSlice'
+
+// online
+import onlineUserReducer from './features/onlineUserSlice'
 
 
 export const store = configureStore({
@@ -57,6 +58,7 @@ export const store = configureStore({
         signupPopup: signupPopupReducer,
         loginPopup: loginPopupReducer,
         editPopup: editPopupReducer,
+        ratingPopup:ratingPopupReducer,
         profile: profileReducer,
         listing: listingReducer,
         soListing: soListingReducer,
@@ -64,11 +66,11 @@ export const store = configureStore({
         locationCoordinates: locationCoordinatesReducer,
         chat: chatReducer,
         wishlist: wishlistReducer,
-        cart: cartReducer,
         theme: themeReducer,
         notification: notificationReducer,
         sellerPopup:sellerPopupReducer,
         rating: ratingReducer,
+        onlineUsers: onlineUserReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

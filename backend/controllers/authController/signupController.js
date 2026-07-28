@@ -68,7 +68,6 @@ export const signup = async (req, res, next) => {
                 averageRating: user.averageRating,
                 reviewCount: user.reviewCount,
                 wishlist:user.wishlist,
-                addToCart:user.addToCart,
                 soldItem: user.soldItem,
                 activeItem: user.activeItem,
                 responsePercent: user.responsePercent,

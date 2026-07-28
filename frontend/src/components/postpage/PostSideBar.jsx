@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { submitListingData } from '../../reducers/features/listing/listing'
 import toast from 'react-hot-toast'
+import Loading from '../Loading'
 
 const PostSideBar = ({ sidebarOpen, setSidebarOpen }) => {
     const dispatch = useDispatch()
@@ -18,48 +19,113 @@ const PostSideBar = ({ sidebarOpen, setSidebarOpen }) => {
     const locName = useSelector((state) => state.location.currLocationName)
     const soMainLocName = locName.split(',')[0]
 
+    const categoryFields = {
+        Electronics: ["brand", "model", "warranty"],
+        Furniture: ["material", "color"],
+        Clothing: ["brand", "size", "color"],
+        Books: ["author", "publisher", "language"],
+        Vehicles: ["brand", "model", "year", "kmsDriven", "fuelType"],
+        Sports: ["brand", "type"],
+        Kitchen: ["brand", "material"],
+    };
+
+    const requiredCategoryFields = categoryFields[product.category] || [];
+
+
+
+    ///// new 
+    const invalidTextValues = ["", "na", "n/a", "n.a", "none", "null"];
+
+    const isValidText = (value) => {
+        if (value === undefined || value === null) return false;
+
+        const text = value.toString().trim().toLowerCase();
+
+        return !invalidTextValues.includes(text);
+    };
+
+    const isValidNumber = (value) => {
+        return value !== "" && !isNaN(value) && Number(value) > 0;
+    };
+
+    const isValidYear = (value) => {
+        const year = Number(value);
+        const currentYear = new Date().getFullYear();
+
+        return year >= 1900 && year <= currentYear;
+    };
+
+    const isValidKm = (value) => {
+        return !isNaN(value) && Number(value) >= 0;
+    };
+
+    const hasAllCategoryFields = requiredCategoryFields.every((field) => {
+        const value = product.categoryData?.[field];
+
+        if (field === "year") return isValidYear(value);
+
+        if (field === "kmsDriven") return isValidKm(value);
+
+        return isValidText(value);
+    });
+
     const onPost = async () => {
-        if (
-            product.name &&
-            product.description &&
-            preview?.length > 0 &&
-            product.price &&
-            product.product_age &&
-            product.original_price &&
-            product.category &&
-            product.condition &&
-            soMainLocName !== 'Set Location'
-        ) {
-            setDisabled(true);
-            const formData = new FormData()
+        if (!isValidText(product.name))
+            return toast.error("Enter a valid product name");
 
-            formData.append("name", product.name)
-            formData.append("description", product.description)
-            formData.append("price", product.price)
-            formData.append("original_price", product.original_price)
-            formData.append("category", product.category)
-            formData.append("condition", product.condition)
-            formData.append("brand", product.brand)
-            formData.append("model", product.model)
-            formData.append("product_age", product.product_age)
+        if (!isValidText(product.description))
+            return toast.error("Enter a valid description");
 
-            formData.append(
-                "location",
-                JSON.stringify(product.location)
-            )
+        if (!preview?.length)
+            return toast.error("Upload at least one image");
 
-            product?.image.forEach((file) => {
-                formData.append("image", file)
-            })
+        if (!isValidNumber(product.price))
+            return toast.error("Enter a valid price");
 
-            await dispatch(submitListingData(formData))
-            toast.success('Congratulations your product is listed')
-            navigate('/')
+        if (soMainLocName === "Set Location")
+            return toast.error("Select a location");
 
-        } else {
-            toast.error('All filed are require')
-        }
-    }
+        if (!isValidText(product.product_age))
+            return toast.error("Enter a valid product age");
+
+        if (!isValidNumber(product.original_price))
+            return toast.error("Enter a valid original price");
+
+        if (Number(product.original_price) < Number(product.price))
+            return toast.error("Original price cannot be less than selling price");
+
+        if (!product.category)
+            return toast.error("Select a category");
+
+        if (!hasAllCategoryFields)
+            return toast.error("Fill all category-specific fields correctly");
+
+        if (!product.condition)
+            return toast.error("Select product condition");
+
+        setDisabled(true);
+
+        const formData = new FormData();
+
+        formData.append("name", product.name);
+        formData.append("description", product.description);
+        formData.append("price", product.price);
+        formData.append("original_price", product.original_price);
+        formData.append("category", product.category);
+        formData.append("condition", product.condition);
+        formData.append("categoryData", JSON.stringify(product.categoryData));
+        formData.append("product_age", product.product_age);
+        formData.append("location", JSON.stringify(product.location));
+
+        product.image.forEach((file) => {
+            formData.append("image", file);
+        });
+
+        await dispatch(submitListingData(formData));
+
+        toast.success("Congratulations! Your product is listed.");
+        navigate("/");
+    };
 
     return (
         <>
@@ -140,8 +206,9 @@ const PostSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                     <button disabled={disabled} onClick={() => {
                         onPost()
                     }} className='bg-primary text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer w-full mt-4 pt-3 pb-3'>
-                        {loading ? 'loading...' : 'Post listing --'}
+                        {loading ? <Loading /> : 'Post listing'}
                     </button>
+
 
                 </div>
 

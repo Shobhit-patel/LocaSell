@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "./wishlistApi.js";
+import toast from "react-hot-toast";
 
 export const getWishlist = createAsyncThunk(
   "wishlist/getWishlist",
@@ -20,6 +21,11 @@ export const toggleWishlist = createAsyncThunk(
       const res = await API.post("/wishlist/toggle", {
         productId,
       });
+
+      // toast.success(res.data.message, {
+      //   id: "wishlist-toast"
+      // });
+
       return {
         productId,
         product,
@@ -40,14 +46,9 @@ const wishlistSlice = createSlice({
     loading: false,
     loadingProductId: null,
     error: null,
-    message: '',
   },
 
-  reducers: {
-    clearMessage: (state) => {
-      state.message = '';
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder
@@ -68,7 +69,7 @@ const wishlistSlice = createSlice({
       })
 
       // Toggle Wishlist
-      .addCase(toggleWishlist.pending, (state,action) => {
+      .addCase(toggleWishlist.pending, (state, action) => {
         state.loading = true;
         state.loadingProductId = action.meta.arg.productId
       })
@@ -78,7 +79,8 @@ const wishlistSlice = createSlice({
 
         state.loading = false;
         state.loadingProductId = null;
-        state.message = message;
+        
+        toast.success(message)
 
         if (type === "added") {
           state.wishlist.push(product);
@@ -97,5 +99,5 @@ const wishlistSlice = createSlice({
   },
 });
 
-export const { clearMessage } = wishlistSlice.actions;
+export const { } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

@@ -23,12 +23,7 @@ const ChatBox = () => {
     useEffect(() => {
         if (!activeChat) return;
 
-        socket.connect();
-
-        socket.emit(
-            "join-chat",
-            activeChat._id
-        );
+        socket.emit("join-chat", activeChat._id);
         dispatch(fetchMessages(activeChat._id));
 
         socket.on("receive-message", (msg) => {

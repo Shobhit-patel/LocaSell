@@ -5,6 +5,7 @@ import { setIsSignup, setIsSignupOpen } from '../../reducers/features/popup/sign
 import { setIsOpen } from '../../reducers/features/popup/loginPopup'
 import toast from 'react-hot-toast'
 import close from '../../assets/icons/close.png'
+import Loading from '../Loading'
 
 const Signup = () => {
     const dispatch = useDispatch()
@@ -36,17 +37,18 @@ const Signup = () => {
     }, [location])
 
     const [errors, setErrors] = useState({})
-    const emailRegex = useMemo(() => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, [])
+    const emailRegex = useMemo(() => /^[a-z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/, [])
+    const passwordRegex = useMemo(() => /^(?=[A-Z])(?=.*\d)(?=.*[@$!%*?&^#()[\]{}\-_=+|\\:;"'<>,./~`]).{8,}$/, [])
 
     const validate = useCallback(() => {
         let newErrors = {};
 
         if (!formData.firstName.trim()) {
-            newErrors.firstName = 'first name is required'
+            newErrors.firstName = 'First name is required'
         }
 
         if (!formData.lastName.trim()) {
-            newErrors.lastName = 'last name is required'
+            newErrors.lastName = 'Last name is required'
         }
 
         if (!formData.email.trim()) {
@@ -57,20 +59,21 @@ const Signup = () => {
 
         if (!formData.password) {
             newErrors.password = 'Password is required'
-        } else if (formData.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters'
+        } else if (!passwordRegex.test(formData.password)) {
+            newErrors.password =
+                'Password must be at least 8 characters, start with a capital letter, contain one number and one special character'
         }
 
         if (!formData.confirmPassword) {
             newErrors.confirmPassword = 'Confirm Password is required'
         }
-
+        
         if (formData.password !== formData.confirmPassword) {
             newErrors.confirmPassword = 'password and confirm password are not same'
         }
 
         return newErrors
-    }, [formData, emailRegex])
+    }, [formData, emailRegex, passwordRegex])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -96,7 +99,7 @@ const Signup = () => {
     return (
         <div >
             <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-20 " onClick={() => dispatch(setIsSignupOpen(false))}>
-                <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 h-125 mx-4 p-5 relative text-left text-sm rounded-xl ">
+                <div onClick={(e) => e.stopPropagation()} className="bg-white dark:bg-gray-900 text-black dark:text-white flex flex-col justify-center w-140 max-h-190 min-h-125 mx-4 px-5 py-12 relative text-left text-sm rounded-xl ">
 
                     <div onClick={() => dispatch(setIsSignupOpen(false))} className='absolute right-5 top-5 bg-secondary p-2 rounded-full cursor-pointer'>
                         <img className='w-3 cursor-pointer' src={close} alt="" />
@@ -105,8 +108,8 @@ const Signup = () => {
                     <div className='flex justify-center items-center gap-1.5 mb-5'>
                         <span className='text-heading font-bold'>Welcome to </span>
                         <div>
-                            <span className='text-primary text-heading font-bold '>loca</span>
-                            <span className='text-heading font-bold'>sell</span>
+                            <span className='text-primary text-heading font-bold '>Loca</span>
+                            <span className='text-heading font-bold'>Sell</span>
                         </div>
                     </div>
 
@@ -133,18 +136,18 @@ const Signup = () => {
                         <div className='flex gap-2.5 mb-5'>
                             <div className='w-full'>
                                 <label className='py-2.5 px-4 ml-0.5  font-medium' htmlFor="password">Password</label>
-                                <input className='w-full  border border-border outline-none rounded-xl mt-1 py-2.5 px-4' id='password' name='password' type="password" value={formData.password} placeholder="password" onChange={handleChange} />
+                                <input className='w-full  border border-border outline-none rounded-xl mt-1 py-2.5 px-4' id='password' name='password' type="password" value={formData.password} placeholder="Password" onChange={handleChange} />
                                 <p className='text-red-500 text-h2 mt-1 ml-5'>{errors.password}</p>
                             </div>
                             <div className='w-full'>
                                 <label className='py-2.5 px-4 ml-0.5  font-medium' htmlFor="confirmPassword">Confirm Password</label>
-                                <input className='w-full  border border-border outline-none rounded-xl mt-1 py-2.5 px-4' id='confirmPassword' name='confirmPassword' type="password" value={formData.confirmPassword} placeholder="confirm password" onChange={handleChange} />
+                                <input className='w-full  border border-border outline-none rounded-xl mt-1 py-2.5 px-4' id='confirmPassword' name='confirmPassword' type="password" value={formData.confirmPassword} placeholder="Confirm password" onChange={handleChange} />
                                 <p className='text-red-500 text-h2 mt-1 ml-5'>{errors.confirmPassword}</p>
                             </div>
                         </div>
 
                         <button disabled={loading} className='bg-primary w-full text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mb-3 pt-3 pb-3 '>
-                            {loading ? 'Loading...' : 'Signup'}
+                            {loading ? <Loading /> : 'Signup'}
                         </button>
                     </form>
 

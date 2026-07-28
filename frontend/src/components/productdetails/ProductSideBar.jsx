@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsOpen } from '../../reducers/features/popup/loginPopup'
 import { startChat } from '../../reducers/features/chat/chatSlice'
-import { toggleCart } from '../../reducers/features/cart/cartSlice'
-import { toggleWishlist } from '../../reducers/features/wishlist/wishlisSlice'
 import { setOpen } from '../../reducers/features/popup/sellerPopup'
 import SellerProfile from '../SellerProfile'
 import { toggleListingStatus } from '../../reducers/features/listing/soOneListing'
 import toast from "react-hot-toast";
 import star from '../../assets/icons/star.png'
+import Loading from '../Loading'
+import { setRatingOpen } from '../../reducers/features/popup/ratingPopup'
+import RatingPopup from '../RatingPopup'
 
 
 const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -68,13 +69,7 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
         return `${diffDays} days ago`;
     }
 
-    const wishlist = useSelector((state) => state.wishlist.wishlist);
     const Wmessage = useSelector((state) => state.wishlist.message)
-
-    const isWishlisted = wishlist.some((item) => {
-        const id = typeof item === "object" ? item._id : item;
-        return id === product?._id;
-    });
 
     useEffect(() => {
         if (Wmessage) {
@@ -82,34 +77,9 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
         }
     }, [Wmessage]);
 
-    const handleWishlistClick = () => {
-        dispatch(toggleWishlist({
-            productId: product?._id,
-            product: product
-        }));
-    };
-
-    const { message, cart } = useSelector((state) => state.cart)
-
-    const isCarted = cart.some((item) => {
-        const id = typeof item === "object" ? item._id : item;
-        return id === product?._id;
-    });
-
-    useEffect(() => {
-        if (message) {
-            toast.success(message);
-        }
-    }, [message]);
-
-    const handleClick = () => {
-        dispatch(toggleCart({
-            productId: product?._id,
-            product: product
-        }));
-    };
 
     const sellerPopup = useSelector((state) => state.sellerPopup.open)
+    const ratingPopup = useSelector((state) => state.ratingPopup.open)
 
     const toggleStatus = async () => {
         try {
@@ -182,32 +152,17 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                                 <div onClick={() => {
                                     clickMessageSeller()
                                 }} className='bg-primary text-white text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-4 pt-3 pb-3'>
-                                    <button className='cursor-pointer'>{loading ? 'Loading...' : 'Message seller'}</button>
+                                    <button className='cursor-pointer'>{loading ? <Loading /> : 'Message seller'}</button>
                                 </div>
 
                                 <div className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
                                     <button className='cursor-pointer'>Call seller</button>
                                 </div>
 
-                                <div onClick={handleWishlistClick} className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
-                                    <button className='cursor-pointer'>
-                                        {isWishlisted ?
-                                            'Remove from wishlist'
-                                            :
-                                            'Save as wishlist'
+                                <div onClick={() => dispatch(setRatingOpen(true))} className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
+                                    <button className='cursor-pointer'>Rate user</button>
+                                </div>
 
-                                        }
-                                    </button>
-                                </div>
-                                <div onClick={handleClick} className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
-                                    <button className='cursor-pointer'>
-                                        {isCarted ?
-                                            'Remove from cart'
-                                            :
-                                            'Add to cart'
-                                        }
-                                    </button>
-                                </div>
                             </div>
                             :
                             <div onClick={toggleStatus} className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
@@ -224,8 +179,9 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                 </div>
             </div>
             {sellerPopup && <SellerProfile seller={seller} />}
+            {ratingPopup && <RatingPopup sellerId={seller}/>}
         </>
-    )
+    )   
 }
 
 export default ProductSideBar

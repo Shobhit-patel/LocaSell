@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setOpen } from '../../reducers/features/popup/editPopup'
 import EditProfile from './EditProfile'
 import hamburger from '../../assets/icons/hamburger.png'
 import star from '../../assets/icons/star.png'
+import { getSellerRatings } from '../../reducers/features/rating/ratingSlice'
+import Loading from '../Loading'
 
 const SoProfile = ({ setSidebarOpen }) => {
     const dispatch = useDispatch()
@@ -19,6 +21,13 @@ const SoProfile = ({ setSidebarOpen }) => {
     }
 
     const { open } = useSelector((state) => state.editPopup)
+    const { ratings, loading } = useSelector((state) => state.rating)
+
+    useEffect(() => {
+        if (user?._id) {
+            dispatch(getSellerRatings(user._id));
+        }
+    }, [dispatch, user?._id]);
 
     return (
         <>
@@ -26,7 +35,7 @@ const SoProfile = ({ setSidebarOpen }) => {
                 <div className='flex items-center gap-2.5 lg:gap-5'>
                     <div className='bg-secondary text-text-dark rounded-full w-20 h-20 lg:w-30 lg:h-30 pt-6 lg:pt-8  text-3xl lg:text-5xl text-center font-bold '>{UserAvatarName}</div>
                     <div>
-                        <h1 className='text-h1'>{user?.firstName} {user?.lastName}</h1>
+                        <h1 className='text-h1'>{user?.firstName.charAt(0).toUpperCase() + user?.firstName.slice(1)} {user?.lastName.charAt(0).toUpperCase() + user?.lastName.slice(1)}</h1>
                         <h1 className='text-h1'>{user?.email}</h1>
                     </div>
                 </div>
@@ -64,10 +73,7 @@ const SoProfile = ({ setSidebarOpen }) => {
                     <h1 className='text-logo font-bold text-primary'>{user?.responsePercent} %</h1>
                     <span className='text-border text-h1'>Response Percent</span>
                 </div>
-                <div className='border border-border text-center w-full  px-5 py-2 rounded-xl'>
-                    <h1 className='text-logo font-bold'>{user?.addToCart.length} </h1>
-                    <span className='text-border text-h1'>Add To Cart</span>
-                </div>
+
                 <div className='border border-border text-center w-full  px-5 py-2 rounded-xl'>
                     <h1 className='text-logo font-bold'>{user?.wishlist.length} </h1>
                     <span className='text-border text-h1'>Wishlist</span>
@@ -76,6 +82,54 @@ const SoProfile = ({ setSidebarOpen }) => {
                     <h1 className='text-logo font-bold'>{user?.productListed.length} </h1>
                     <span className='text-border text-h1'>Product Listed</span>
                 </div>
+            </div>
+
+            <div className="mt-5">
+                <h2 className="text-heading font-semibold mb-4">
+                    Reviews ({ratings?.length || 0})
+                </h2>
+
+                {loading ? (
+                    <Loading />
+                ) : ratings?.length === 0 ? (
+                    <p className="text-gray-500">No reviews yet.</p>
+                ) : (
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2.5'>
+                        {ratings.map((item) => (
+                            <div
+                                key={item._id}
+                                className="border border-border rounded-xl p-4"
+                            >
+                                <div className="flex justify-between items-center">
+                                    <div className='w-full'>
+                                        <div className='flex justify-between'>
+                                            <h3>
+                                                {item.reviewer.firstName}{" "}
+                                                {item.reviewer.lastName}
+                                            </h3>
+                                            <span className="text-sm text-gray-500">
+                                                {new Date(item.createdAt).toLocaleDateString()}
+                                            </span>
+                                        </div>
+
+                                        <div className="flex items-center gap-1 mt-1">
+                                            {[...Array(item.rating)].map((_, index) => (
+                                                <img className="w-4 h-4"
+                                                    key={index}
+                                                    src={star}
+                                                    alt="star" />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p className="mt-1 text-h1 text-gray-500">
+                                    {item.review}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                )}
             </div>
             {open && <EditProfile />}
         </>
