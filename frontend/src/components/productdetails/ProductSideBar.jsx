@@ -17,6 +17,8 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const token = localStorage.getItem("token");
+
     const seller = useSelector((state) => state.soOneListing?.soOneListingSeller)
 
     const SellerAvatarName = seller?.firstName?.trim().split(/\s+/).map(word => word[0].toUpperCase()).join('') + seller?.lastName?.trim().split(/\s+/).map(word => word[0].toUpperCase()).join('')
@@ -89,6 +91,14 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
         }
     };
 
+     const openRating = () => {
+        if (token) {
+            dispatch(setRatingOpen(true))
+        } else {
+            dispatch(setIsOpen(true));
+        }
+    }
+
     return (
         <>
             <div onClick={() => setSidebarOpen(false)} className={`fixed inset-0 bg-black/40 z-10 transition-opacity duration-300 lg:hidden ${sidebarOpen ? "opacity-100 visible" : "opacity-0 invisible"}`} />
@@ -159,7 +169,7 @@ const ProductSideBar = ({ sidebarOpen, setSidebarOpen }) => {
                                     <button className='cursor-pointer'>Call seller</button>
                                 </div>
 
-                                <div onClick={() => dispatch(setRatingOpen(true))} className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
+                                <div onClick={openRating } className='border border-border text-h2 font-medium font-stretch-130% text-center rounded-xl cursor-pointer mt-2 pt-3 pb-3'>
                                     <button className='cursor-pointer'>Rate user</button>
                                 </div>
 
