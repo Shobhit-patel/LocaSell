@@ -122,7 +122,7 @@ const SellerProfile = ({ seller }) => {
 
                     {/* map */}
                     {center && (
-                        <MapContainer center={center} attributionControl={false} zoom={13} className="z-10 mt-5 h-[250px] w-full rounded-xl border border-border dark:border-gray-700 " >
+                        <MapContainer center={center} attributionControl={false} zoom={13} scrollWheelZoom={false} dragging={false} className="z-10 mt-5 h-[250px] w-full rounded-xl border border-border dark:border-gray-700 " >
                             <TileLayer attribution="&copy; OpenStreetMap contributors" url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
                             <MapEvents dispatch={dispatch} />
