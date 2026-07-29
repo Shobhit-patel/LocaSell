@@ -121,13 +121,13 @@ const ProductMain = ({ setSidebarOpen }) => {
                     <div className='absolute left-2 sm:left-5 z-5' onClick={(e) => e.stopPropagation()}>
                         {
                             count !== 0 &&
-                            <img onClick={() => setCount(count - 1)} className=' w-7 sm:w-10 md:w-12' src={leftArrow} alt="arrow" />
+                            <img onClick={() => setCount(count - 1)} className='w-9 sm:w-10 md:w-10 rounded-full bg-white p-2' src={leftArrow} alt="arrow" />
                         }
                     </div>
                     <div className='absolute right-2 sm:right-5 z-5' onClick={(e) => e.stopPropagation()}>
                         {
                             count !== product?.image?.length - 1 &&
-                            <img onClick={() => setCount(count + 1)} className='w-7 sm:w-10 md:w-12' src={rightArrow} alt="arrow" />
+                            <img onClick={() => setCount(count + 1)} className='w-9 sm:w-10 md:w-10 rounded-full bg-white p-2' src={rightArrow} alt="arrow" />
                         }
                     </div>
 
