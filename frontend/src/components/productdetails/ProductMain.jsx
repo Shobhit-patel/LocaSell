@@ -141,12 +141,12 @@ const ProductMain = ({ setSidebarOpen }) => {
                 <div className='flex mt-2.5 gap-2.5 '>
                     {
                         product?.image?.map((i, key) => (
-                            <div key={key} onClick={() => setCount(key)} className={`bg-secondary rounded-xl cursor-pointer place-items-center w-fit h-20.5 border transition-all duration-200 ${count === key
+                            <div key={key} onClick={() => setCount(key)} className={`bg-secondary rounded-xl cursor-pointer place-items-center w-fit h-20 border transition-all duration-200 ${count === key
                                 ? "border-primary "
                                 : "border-border hover:border-primary"
                                 }`}
                             >
-                                <img className='h-19.5 overflow-hidden rounded-xl' src={i} alt="product" />
+                                <img className='h-19.5 p-[0.2px] overflow-hidden rounded-xl' src={i} alt="product" />
                             </div>
                         ))
                     }
