@@ -88,7 +88,7 @@ const Main = ({ setSidebarOpen }) => {
                                 dispatch(setImagePopupOpen(false))
                             }} key={item?._id} className='border border-border rounded-xl cursor-pointer max-w-2xs'>
                                 <div className='flex justify-center items-center bg-secondary relative h-40 overflow-hidden rounded-t-xl'>
-                                    <img className='h-40 w-80' src={item?.image?.[0]} alt={item?.name} />
+                                    <img className='h-40 w-80 object-cover' src={item?.image?.[0]} alt={item?.name} />
                                     {item?.status === 'sold' &&
                                         <div className='absolute flex justify-center items-center top-0 rounded-t-xl w-full h-full text-2xl bg-white/60'>Sold</div>
                                     }
