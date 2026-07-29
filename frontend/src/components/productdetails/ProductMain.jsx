@@ -183,7 +183,7 @@ const ProductMain = ({ setSidebarOpen }) => {
                         {Object.entries(product?.categoryData || {}).map(([key, value]) => (
                             <div key={key}>
                                 <div className='grid mb-3'>
-                                    <span className='text-h4 text-gray-500 font-medium'>{key}</span>
+                                    <span className='text-h4 text-gray-500 font-medium'>{key?.charAt(0)?.toUpperCase() + key?.slice(1)}</span>
                                     <span className='text-h2'>{value}</span>
                                 </div>
                             </div>
