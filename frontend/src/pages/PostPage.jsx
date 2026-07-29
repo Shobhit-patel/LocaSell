@@ -14,7 +14,7 @@ const PostPage = () => {
     }, [])
 
     const check = useSelector((state) => state.uploaded.productInfo)
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token")
 
     useEffect(() => {
         if (!token) {
@@ -23,12 +23,45 @@ const PostPage = () => {
         }
     }, [])
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+
+    // Validation
+    const categoryFields = {
+        Electronics: ["brand", "model", "warranty"],
+        Furniture: ["material", "color"],
+        Clothing: ["brand", "size", "color"],
+        Books: ["author", "publisher", "language"],
+        Vehicles: ["brand", "model", "year", "kmsDriven", "fuelType"],
+        Sports: ["brand", "type"],
+        Kitchen: ["brand", "material"],
+    }
+
+    const invalidTextValues = ["", "na", "n/a", "n.a", "none", "null"]
+
+    const isValidText = (value) => {
+        if (value === undefined || value === null) return false
+        return !invalidTextValues.includes(value.toString().trim().toLowerCase())
+    }
+
+    const requiredFields = categoryFields[check.category] || []
+    const categoryComplete = requiredFields.every((field) => isValidText(check.categoryData?.[field]))
+
+    const detailsComplete =
+        isValidText(check.name) &&
+        isValidText(check.description) &&
+        check.price &&
+        isValidText(check.product_age) &&
+        check.original_price &&
+        check.category &&
+        check.condition &&
+        categoryComplete &&
+        check.location
 
     return (
         <>
             <div>
                 <div className='flex justify-between border-b border-border text-h2 font-medium pt-4 pr-7 pb-4 pl-7'>
+
                     <div className='flex items-center gap-2'>
                         {
                             check.image?.length > 0 ?
@@ -41,8 +74,8 @@ const PostPage = () => {
 
                     <div className='flex items-center gap-2'>
                         {
-                            check.name && check.description && check.price && check.brand && check.model && check.product_age && check.original_price && check.category && check.condition && check.location != 'Set Location' ?
-                                <span className='bg-primary p-0.5 w-6 h-6 text-center text-white rounded-full '>2</span>
+                            detailsComplete ?
+                                <span className='bg-primary p-0.5 w-6 h-6 text-center text-white rounded-full'>2</span>
                                 :
                                 <span className='border p-0.5 w-6 h-6 text-center rounded-full'>2</span>
                         }
@@ -51,18 +84,20 @@ const PostPage = () => {
 
                     <div className='flex items-center gap-2'>
                         {
-                            check.name && check.description && check.price && check.brand && check.model && check.product_age && check.original_price && check.category && check.condition && check.location != 'Set Location' && check.image?.length > 0 ?
-                                <span className='bg-primary p-0.5 w-6 h-6 text-center text-white rounded-full '>3</span>
+                            detailsComplete && check.image?.length > 0 ?
+                                <span className='bg-primary p-0.5 w-6 h-6 text-center text-white rounded-full'>3</span>
                                 :
                                 <span className='border p-0.5 w-6 h-6 text-center rounded-full'>3</span>
                         }
                         <span className='cursor-pointer'>Review</span>
                     </div>
+
                 </div>
 
                 <div className='flex mt-0 h-screen overflow-hidden'>
                     <PostMain setSidebarOpen={setSidebarOpen} />
-                    <PostSideBar sidebarOpen={sidebarOpen}
+                    <PostSideBar
+                        sidebarOpen={sidebarOpen}
                         setSidebarOpen={setSidebarOpen}
                     />
                 </div>
